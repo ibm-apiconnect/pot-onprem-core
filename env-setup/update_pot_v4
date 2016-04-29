@@ -1,6 +1,6 @@
 #!/bin/sh
 
-# Version: 3
+# Version: 4
 # Version Fix: Update locations for new github repos
 
 POTDIR=~/.pot
