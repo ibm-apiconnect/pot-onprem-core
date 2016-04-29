@@ -1,3 +1,9 @@
+# IntelliJ project files
+.idea
+*.iml
+out
+gen
+
 # Logs
 logs
 *.log
@@ -31,3 +37,8 @@ node_modules
 
 # Optional REPL history
 .node_repl_history
+
+# Ignore custom config files for consumer app
+lab-files/lab7/consumer_app/config/*
+!lab-files/lab7/consumer_app/config/default.json
+.targets
