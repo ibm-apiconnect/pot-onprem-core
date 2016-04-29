@@ -6,7 +6,7 @@ then
 	echo "update_pot is at Version 4 already"
 	exit 0
 else	
-	cp ~/.pot/apic-pot/env_setup/update_pot_v4 ~/bin/update_pot
+	cp ~/.pot/apic-pot/env-setup/update_pot_v4 ~/bin/update_pot
 	echo "re-cloning with new v4 repo"
 	echo `update_pot clone`
 fi
