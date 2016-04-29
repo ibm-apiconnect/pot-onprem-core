@@ -5,10 +5,11 @@ if grep -q "Version: 4" ~/bin/update_pot
 then
 	echo "update_pot is at Version 4 already"
 	exit 0
-else	
+else
 	cp ~/.pot/apic-pot/env-setup/update_pot_v4 ~/bin/update_pot
 	echo "re-cloning with new v4 repo"
 	echo `update_pot clone`
+	chmod 775 ~/.pot/apic-pot/env-setup/update_scripts/*
 fi
 
 exit $?
