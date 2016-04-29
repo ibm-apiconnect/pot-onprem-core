@@ -1,0 +1,50 @@
+{
+  "name": "item",
+  "base": "PersistedModel",
+  "idInjection": true,
+  "options": {
+    "validateUpsert": true
+  },
+  "properties": {
+    "name": {
+      "type": "string",
+      "required": true,
+      "description": "item name"
+    },
+    "description": {
+      "type": "string",
+      "required": true,
+      "description": "item description"
+    },
+    "img": {
+      "type": "string",
+      "required": true,
+      "description": "location of item image"
+    },
+    "img_alt": {
+      "type": "string",
+      "required": true,
+      "description": "item image title"
+    },
+    "price": {
+      "type": "number",
+      "required": true,
+      "description": "item price"
+    },
+    "rating": {
+      "type": "number",
+      "required": false,
+      "description": "item rating"
+    }
+  },
+  "validations": [],
+  "relations": {
+    "reviews": {
+      "type": "hasMany",
+      "model": "review",
+      "foreignKey": ""
+    }
+  },
+  "acls": [],
+  "methods": {}
+}

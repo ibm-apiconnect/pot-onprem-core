@@ -1,0 +1,85 @@
+#!/usr/bin/env bash
+
+complete_dir=~/lab_files/lab$1/complete/inventory/
+student_dir=~/ThinkIBM/inventory/
+files=()
+lab_num=$1
+
+merge_lab2(){
+  files=(common/models/item.json common/models/review.json definitions/inventory.yaml server/datasources.json server/model-config.json)
+  run_merge
+}
+
+merge_lab3(){
+  files=(common/models/item.js server/config.json)
+  run_merge
+}
+
+merge_lab4(){
+  files=(definitions/inventory.yaml definitions/oauth_1.0.0.yaml)
+  run_merge
+}
+
+merge_lab5(){
+  files=(definitions/financing_1.0.0.yaml definitions/logistics_1.0.0.yaml)
+  run_merge
+}
+
+merge_lab6(){
+  files=(definitions/inventory-product.yaml)
+  run_merge
+}
+
+run_merge(){
+  for i in "${files[@]}"
+  do
+    printf "Running validation check on file: %s \n" "$i"
+    if [[ $lab_num -gt 3 && $i = "definitions/inventory.yaml" ]]
+      then
+        printf "maintaining your app-id\n"
+        student_appid=`grep "app-id: I" $student_dir$i | cut -c17-`
+        old_appid=`grep "app-id: I" $complete_dir$i | cut -c17-`
+        echo `sed -i s/$old_appid/$student_appid/ $complete_dir$i`
+    fi
+    result=$(diff -I "x-any" -I "properties:" $student_dir$i $complete_dir$i)
+    if [ $? -eq 0 ]
+      then
+        printf "... Looks good!"
+      else
+        echo `cp $complete_dir$i $student_dir$i`
+        printf "\n... merged files."
+    fi
+    printf "\n\n"
+  done
+  refresh_swagger
+}
+
+refresh_swagger(){
+  inv_file=definitions/inventory.yaml
+  cd $student_dir
+  echo `apic loopback:refresh`
+  echo `awk '/x-any/{matched=1;next} 1==matched{matched=0;next} {print}' $student_dir$inv_file > $student_dir$inv_file.tmp`
+  echo `mv $student_dir$inv_file.tmp $student_dir$inv_file`
+}
+
+case "$1" in
+  2)
+    merge_lab2
+    ;;
+  3)
+    merge_lab3
+    ;;
+  4)
+    merge_lab4
+    ;;
+  5)
+    merge_lab5
+    ;;
+  6)
+    merge_lab6
+    ;;
+  *)
+    echo "Usage: merge_lab {2|3|4|5|6}"
+    exit 1
+    ;;
+esac

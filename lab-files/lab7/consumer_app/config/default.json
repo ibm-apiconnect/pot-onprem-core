@@ -1,0 +1,48 @@
+{
+  "Application": {
+    "client_id": "",
+    "client_secret": ""
+  },
+  "API-Server": {
+    "protocol": "https",
+    "host": "api.think.ibm",
+    "org": "sales",
+    "catalog": "sb"
+  },
+  "APIs": {
+    "inventory": {
+      "base_path": "/inventory",
+      "require": [
+        "client_id",
+        "client_secret",
+        "oauth"
+      ]
+    },
+    "financing": {
+      "base_path": "/financing",
+      "require": [
+        "client_id"
+      ]
+    },
+    "logistics": {
+      "base_path": "/logistics",
+      "require": [
+        "client_id"
+      ]
+    },
+    "oauth20": {
+      "base_path": "/oauth20",
+      "paths": {
+        "authz": "/authorize",
+        "token": "/token"
+      },
+      "grant_types": [
+        "password"
+      ],
+      "scopes": [
+        "inventory"
+      ],
+      "redirect_url": ""
+    }
+  }
+}

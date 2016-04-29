@@ -1,0 +1,95 @@
+#!/bin/sh
+
+# Version: 3
+# Version Fix: Update locations for new github repos
+
+POTDIR=~/.pot
+SCRIPTDIR=~/.pot/apic-pot/env-setup/update_scripts
+GITENVSETUP="https://github.com/ibm-apic-pot/env-setup.git"
+GITLABFILES="https://github.com/ibm-apic-pot/lab-files.git"
+
+now=$(date +"%m_%d_%Y")
+log="/tmp/update-pot.log"
+echo "Starting update_pot_image: Logging to $log..."
+date | tee -a "$log"
+
+if [ ! -d "$POTDIR" ]
+then
+  mkdir /home/student/.pot
+fi
+
+clone() {
+  rm -rf ~/.pot/apic-pot
+  mkdir ~/.pot/apic-pot
+  cd ~/.pot/apic-pot
+  git clone $GITENVSETUP
+  git clone $GITLABFILES
+}
+
+patch() {
+  if [ "$(ls -A $SCRIPTDIR)" ]
+    then
+      chmod 775 "${SCRIPTDIR}/"*
+  fi
+
+  for SCRIPT in "${SCRIPTDIR}/"*
+    do
+      case "${SCRIPT}" in
+        *~|*.bak)
+          continue
+          ;;
+        *)
+          if [ -f "${SCRIPT}" -a -x "${SCRIPT}" ]; then
+            echo "Found/Starting Script:${SCRIPT}";
+            "${SCRIPT}" $@ >> "$log"
+	          #echo $?;
+            if [ $? -ne 0 ]; then
+              echo "ERROR with ${SCRIPT}";
+		          #break;
+	          fi
+          fi
+          ;;
+      esac
+    done
+}
+
+labs () {
+	rm -rf ~/lab_files
+	cp -R $POTDIR/apic-pot/lab-files ~/lab_files
+	rm -rf ~/lab_files/.git
+	rm -rf ~/lab_files/.gitignore
+	rm -rf ~/lab_files/LICENSE
+	rm -rf ~/lab_files/README.md
+
+	chmod 775 ~/lab_files/lab8/analytics.sh
+
+  cd ~/lab_files/lab7/consumer_app/
+  npm install --quiet
+}
+
+case "$1" in
+  clone)
+    clone | tee -a "$log"
+    ;;
+  patch)
+    clone | tee -a "$log"
+    patch | tee -a "$log"
+    ;;
+  labs)
+    clone | tee -a "$log"
+    labs  | tee -a "$log"
+    ;;
+  all)
+    clone | tee -a "$log"
+    patch | tee -a "$log"
+    labs  | tee -a "$log"
+    ;;
+  *)
+    echo "Usage: {clone|patch|labs|all}"
+    echo "--- clone: does a full clone of the GIT repo to ~/.pot"
+    echo "--- patch: clones GIT repo and runs all scripts found in ~/.pot/apic-pot/env_setup/update_scripts"
+    echo "--- labs:  clones GIT and installs and configures lab files"
+    echo "--- all:   performs a clone, patch, and labs in sequence"
+    exit 1
+    ;;
+esac

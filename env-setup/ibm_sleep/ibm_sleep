@@ -1,0 +1,19 @@
+#!/bin/bash
+
+case "$1" in
+        suspend)
+        # execute on suspend
+        ;;
+        resume|thaw)
+        # execute on resume
+        /home/student/bin/force-ntp-udate
+        /home/student/bin/force-liberty-restart
+        ;;
+        thaw)
+        # execute on thaw from hibernate
+        /home/student/bin/force-ntp-udate
+        /home/student/bin/force-liberty-restart
+        ;;
+        *)
+        ;;
+esac

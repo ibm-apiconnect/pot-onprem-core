@@ -1,0 +1,149 @@
+swagger: '2.0'
+info:
+  version: 1.0.0
+  title: financing
+  x-ibm-name: financing
+  description: Operations for calculating financing payments
+basePath: /financing
+paths:
+  /calculate:
+    get:
+      responses:
+        '200':
+          description: 200 OK
+          schema:
+            $ref: '#/definitions/paymentAmount'
+      operationId: get.financingAmount
+      parameters:
+        - name: amount
+          type: number
+          required: true
+          in: query
+          description: amount to finance
+          format: float
+        - name: duration
+          type: integer
+          required: true
+          in: query
+          description: length of term in months
+          format: int32
+        - name: rate
+          type: number
+          required: true
+          in: query
+          description: interest rate
+          format: float
+securityDefinitions:
+  clientID:
+    description: ''
+    in: header
+    name: X-IBM-Client-Id
+    type: apiKey
+security:
+  - clientID: []
+x-ibm-configuration:
+  assembly:
+    execute:
+      - activity-log:
+          title: activity-log
+          content: payload
+          error-content: payload
+      - map:
+          title: map
+          inputs:
+            amount:
+              schema:
+                type: float
+              variable: request.parameters.amount
+            duration:
+              schema:
+                type: integer
+              variable: request.parameters.duration
+            rate:
+              schema:
+                type: float
+              variable: request.parameters.rate
+          outputs:
+            output:
+              schema:
+                $schema: 'http://json-schema.org/draft-04/schema#'
+                id: 'http://services.think.ibm'
+                type: object
+                properties:
+                  Envelope:
+                    type: object
+                    xml:
+                      prefix: soapenv
+                      namespace: 'http://schemas.xmlsoap.org/soap/envelope/'
+                    properties:
+                      Body:
+                        type: object
+                        properties:
+                          financingRequest:
+                            type: object
+                            xml:
+                              prefix: ser
+                              namespace: 'http://services.think.ibm'
+                            properties:
+                              amount:
+                                id: 'http://services.think.ibm/Envelope/Body/financingRequest/amount'
+                                type: number
+                                name: amount
+                              duration:
+                                id: 'http://services.think.ibm/envelope/body/financingRequest/duration'
+                                type: integer
+                                name: duration
+                              rate:
+                                id: 'http://services.think.ibm/envelope/body/financingRequest/rate'
+                                type: number
+                                name: rate
+                            additionalProperties: false
+                            required:
+                              - amount
+                              - duration
+                              - rate
+                            name: financingRequest
+                        additionalProperties: false
+                        required:
+                          - financingRequest
+                        name: Body
+                    additionalProperties: false
+                    required:
+                      - Body
+                    name: Envelope
+                additionalProperties: false
+                required:
+                  - Envelope
+                title: output
+              variable: message.body
+              content: application/xml
+          actions:
+            - set: output.Envelope.Body.financingRequest.amount
+              from: amount
+            - set: output.Envelope.Body.financingRequest.duration
+              from: duration
+            - set: output.Envelope.Body.financingRequest.rate
+              from: rate
+      - invoke:
+          target-url: 'https://services.think.ibm:1443/financing'
+          verb: POST
+      - gatewayscript:
+          title: gatewayscript
+          source: "session.name('_apimgmt').setVar('content-type', 'application/xml');"
+      - xml-to-json:
+          title: xml-to-json
+  gateway: datapower-gateway
+schemes:
+  - https
+consumes:
+  - application/json
+produces:
+  - application/json
+definitions:
+  paymentAmount:
+    properties:
+      paymentAmount:
+        type: number
+        description: Monthly payment amount
+        format: float
+        example: 199.99

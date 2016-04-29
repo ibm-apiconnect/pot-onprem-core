@@ -1,0 +1,17 @@
+#!/bin/bash
+
+case "$1" in
+        suspend)
+        # execute on suspend
+        ;;
+        resume)
+        # execute on resume
+        /home/student/bin/force-ntp-udate
+        ;;
+        thaw)
+        # execute on thaw from hibernate
+        /home/student/bin/force-ntp-udate
+        ;;
+        *)
+        ;;
+esac

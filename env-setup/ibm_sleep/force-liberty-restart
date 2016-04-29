@@ -1,0 +1,13 @@
+#!/bin/bash
+
+cd /home/student/wlpn/
+APPID=$(ls -d */ | grep -v "\." | sed 's/\/$//')
+
+if [ -n "$APPID" ]; then
+  cd ~
+  wlpn-server stop $APPID
+  echo `echo Passw0rd! | sudo -S wlpn-controller stop`
+  echo `echo Passw0rd! | sudo -S wlpn-controller start`
+fi
+
+exit $?

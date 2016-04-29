@@ -1,0 +1,113 @@
+paths:
+  /customers:
+    get:
+      tags:
+        - customers
+      summary: Find all instances of the model matched by filter from the data source.
+      operationId: customers.find
+      parameters:
+        - name: filter
+          in: query
+          description: 'Filter defining fields, where, include, order, offset, and limit'
+          required: false
+          type: string
+          format: JSON
+      responses:
+        '200':
+          description: Request was successful
+          schema:
+            type: array
+            items:
+              $ref: '#/definitions/customers'
+      deprecated: false
+definitions:
+  customers:
+    properties:
+      ID:
+        type: number
+        format: double
+      address:
+        type: string
+      city:
+        type: string
+      name:
+        type: string
+      phone:
+        type: number
+        format: double
+      state:
+        type: string
+      zip:
+        type: string
+    required:
+      - ID
+      - address
+      - city
+      - name
+      - phone
+      - state
+      - zip
+    additionalProperties: false
+swagger: '2.0'
+info:
+  x-ibm-name: load-student
+  version: 1.0.0
+  title: load-student
+schemes:
+  - https
+basePath: /api
+consumes:
+  - application/json
+produces:
+  - application/json
+securityDefinitions:
+  clientIdHeader:
+    type: apiKey
+    in: header
+    name: X-IBM-Client-Id
+security:
+  - clientIdHeader: []
+x-ibm-configuration:
+  testable: true
+  enforced: true
+  cors:
+    enabled: true
+  gateway: datapower-gateway
+  catalogs:
+    apic-dev:
+      properties:
+        runtime-url: $(TARGET_URL)
+    sb:
+      properties:
+        runtime-url: 'http://192.168.225.10:4001'
+  assembly:
+    execute:
+      - map:
+          title: map
+          inputs: {}
+          outputs:
+            output:
+              schema:
+                $ref: '#/definitions/customers'
+              variable: message.body
+          actions:
+            - set: output.ID
+              value: '1'
+            - set: output.address
+              value: "'200 West Monroe Street'"
+            - set: output.city
+              value: "'Chicago'"
+            - set: output.name
+              value: "'Think Products Inc'"
+            - set: output.phone
+              value: "'312 282 2727'"
+            - set: output.state
+              value: "'IL'"
+            - set: output.zip
+              value: "'60680'"
+  properties:
+    appserver:
+      value: 'http://192.168.225.10:4003'
+      description: ''
+      encoded: false
+  phase: realized

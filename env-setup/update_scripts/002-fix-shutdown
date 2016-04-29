@@ -1,0 +1,6 @@
+#!/bin/sh
+
+echo "002-fix-shutdown: Fix Shutdown Time"
+
+echo "tmp script"
+exit 0

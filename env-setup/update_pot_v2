@@ -1,0 +1,86 @@
+#!/bin/sh
+
+# Version: 2
+# Version Fix: Relative vs Fixed pathing issue.
+
+POTDIR=~/.pot
+SCRIPTDIR=~/.pot/apic-pot/env_setup/update_scripts
+
+
+now=$(date +"%m_%d_%Y")
+log="/tmp/update-pot.log"
+echo "Starting update_pot_image: Logging to $log..."
+date | tee -a "$log"
+
+if [ ! -d "$POTDIR" ]
+then
+  mkdir /home/student/.pot
+fi
+
+clone(){
+  cd /home/student/.pot
+  rm -rf apic-pot
+  git clone https://hub.jazz.net/git/bakert/apic-pot
+}
+
+patch() {
+  if [ "$(ls -A $SCRIPTDIR)" ]
+    then
+      chmod 775 "${SCRIPTDIR}/"*
+  fi
+
+  for SCRIPT in "${SCRIPTDIR}/"*
+    do
+      case "${SCRIPT}" in
+        *~|*.bak)
+          continue
+          ;;
+        *)
+          if [ -f "${SCRIPT}" -a -x "${SCRIPT}" ]; then
+            echo "Found/Starting Script:${SCRIPT}";
+            "${SCRIPT}" $@ >> "$log"
+	          #echo $?;
+            if [ $? -ne 0 ]; then
+              echo "ERROR with ${SCRIPT}";
+		          #break;
+	          fi
+          fi
+          ;;
+      esac
+    done
+}
+
+labs () {
+	rm -rf ~/lab_files
+	cp -R $POTDIR/apic-pot/lab_files ~
+
+	chmod 775 ~/lab_files/lab8/analytics.sh
+
+  cd ~/lab_files/lab7/consumer_app/
+  npm install
+}
+
+case "$1" in
+  clone)
+    clone | tee -a "$log"
+    ;;
+  patch)
+    patch | tee -a "$log"
+    ;;
+  labs)
+    labs  | tee -a "$log"
+    ;;
+  all)
+    clone | tee -a "$log"
+    patch | tee -a "$log"
+    labs  | tee -a "$log"
+    ;;
+  *)
+    echo "Usage: {clone|patch|labs|all}"
+    echo "--- clone: does a full clone of the GIT repo to ~/.pot"
+    echo "--- patch: runs all scripts found in ~/.pot/apic-pot/env_setup/update_scripts"
+    echo "--- labs: installs and configures lab files (requires clone first)"
+    echo "--- all:	 performs a clone, patch, and labs in sequence"
+    exit 1
+    ;;
+esac

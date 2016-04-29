@@ -1,0 +1,66 @@
+<?xml version="1.0"?>
+<wsdl:definitions name="financing"
+                  targetNamespace="http://services.think.ibm"
+                  xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/"
+                  xmlns:tns="http://services.think.ibm"
+                  xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/"
+                  xmlns:s="http://www.w3.org/2001/XMLSchema"
+                  xmlns="http://schemas.xmlsoap.org/wsdl/">
+
+    <wsdl:types>
+        <s:schema targetNamespace="http://services.think.ibm"
+                  elementFormDefault="qualified">
+            <s:element name="financingRequest">
+                <s:complexType>
+                    <s:sequence>
+                        <s:element name="amount" type="s:string"/>
+                        <s:element name="duration" type="s:string"/>
+                        <s:element name="rate" type="s:string"/>
+                    </s:sequence>
+                </s:complexType>
+            </s:element>
+            <s:element name="financingResult">
+                <s:complexType>
+                    <s:sequence>
+                        <s:element name="paymentAmount" type="s:string"/>
+                    </s:sequence>
+                </s:complexType>
+            </s:element>
+        </s:schema>
+    </wsdl:types>
+
+    <wsdl:message name="financingInput">
+        <wsdl:part name="body" element="tns:financingRequest"/>
+    </wsdl:message>
+
+    <wsdl:message name="financingOutput">
+        <wsdl:part name="body" element="tns:financingResult"/>
+    </wsdl:message>
+
+    <wsdl:portType name="financingPortType">
+        <wsdl:operation name="financing">
+            <wsdl:input message="tns:financingInput"/>
+            <wsdl:output message="tns:financingOutput"/>
+        </wsdl:operation>
+    </wsdl:portType>
+
+    <wsdl:binding name="financingBinding" type="tns:financingPortType">
+        <soap:binding style="document" transport="http://schemas.xmlsoap.org/soap/http"/>
+        <wsdl:operation name="financing">
+            <soap:operation soapAction="http://services.think.ibm/financing"/>
+            <wsdl:input>
+                <soap:body use="literal"/>
+            </wsdl:input>
+            <wsdl:output>
+                <soap:body use="literal"/>
+            </wsdl:output>
+        </wsdl:operation>
+    </wsdl:binding>
+
+    <wsdl:service name="financingService">
+        <wsdl:port name="financingPort" binding="tns:financingBinding">
+            <soap:address location="http://services.think.ibm/financing"/>
+        </wsdl:port>
+    </wsdl:service>
+
+</wsdl:definitions>

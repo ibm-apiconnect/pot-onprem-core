@@ -1,0 +1,559 @@
+paths:
+  '/items/{id}/reviews/{fk}':
+    get:
+      tags:
+        - item
+      summary: Find a related item by id for reviews.
+      operationId: item.prototype.__findById__reviews
+      parameters:
+        - name: fk
+          in: path
+          description: Foreign key for reviews
+          required: true
+          type: string
+          format: JSON
+        - name: id
+          in: path
+          description: PersistedModel id
+          required: true
+          type: string
+          format: JSON
+      responses:
+        '200':
+          description: Request was successful
+          schema:
+            $ref: '#/definitions/review'
+      deprecated: false
+    delete:
+      tags:
+        - item
+      summary: Delete a related item by id for reviews.
+      operationId: item.prototype.__destroyById__reviews
+      parameters:
+        - name: fk
+          in: path
+          description: Foreign key for reviews
+          required: true
+          type: string
+          format: JSON
+        - name: id
+          in: path
+          description: PersistedModel id
+          required: true
+          type: string
+          format: JSON
+      responses:
+        '204':
+          description: Request was successful
+      deprecated: false
+    put:
+      tags:
+        - item
+      summary: Update a related item by id for reviews.
+      operationId: item.prototype.__updateById__reviews
+      parameters:
+        - name: fk
+          in: path
+          description: Foreign key for reviews
+          required: true
+          type: string
+          format: JSON
+        - name: data
+          in: body
+          required: false
+          schema:
+            $ref: '#/definitions/review'
+        - name: id
+          in: path
+          description: PersistedModel id
+          required: true
+          type: string
+          format: JSON
+      responses:
+        '200':
+          description: Request was successful
+          schema:
+            $ref: '#/definitions/review'
+      deprecated: false
+  '/items/{id}/reviews':
+    get:
+      tags:
+        - item
+      summary: Queries reviews of item.
+      operationId: item.prototype.__get__reviews
+      parameters:
+        - name: filter
+          in: query
+          required: false
+          type: string
+          format: JSON
+        - name: id
+          in: path
+          description: PersistedModel id
+          required: true
+          type: string
+          format: JSON
+      responses:
+        '200':
+          description: Request was successful
+          schema:
+            type: array
+            items:
+              $ref: '#/definitions/review'
+      deprecated: false
+    post:
+      tags:
+        - item
+      summary: Creates a new instance in reviews of this model.
+      operationId: item.prototype.__create__reviews
+      parameters:
+        - name: data
+          in: body
+          required: false
+          schema:
+            $ref: '#/definitions/review'
+        - name: id
+          in: path
+          description: PersistedModel id
+          required: true
+          type: string
+          format: JSON
+      responses:
+        '200':
+          description: Request was successful
+          schema:
+            $ref: '#/definitions/review'
+      deprecated: false
+    delete:
+      tags:
+        - item
+      summary: Deletes all reviews of this model.
+      operationId: item.prototype.__delete__reviews
+      parameters:
+        - name: id
+          in: path
+          description: PersistedModel id
+          required: true
+          type: string
+          format: JSON
+      responses:
+        '204':
+          description: Request was successful
+      deprecated: false
+  '/items/{id}/reviews/count':
+    get:
+      tags:
+        - item
+      summary: Counts reviews of item.
+      operationId: item.prototype.__count__reviews
+      parameters:
+        - name: where
+          in: query
+          description: Criteria to match model instances
+          required: false
+          type: string
+          format: JSON
+        - name: id
+          in: path
+          description: PersistedModel id
+          required: true
+          type: string
+          format: JSON
+      responses:
+        '200':
+          description: Request was successful
+          schema:
+            type: object
+      deprecated: false
+  /items:
+    post:
+      tags:
+        - item
+      summary: Create a new instance of the model and persist it into the data source.
+      operationId: item.create
+      parameters:
+        - name: data
+          in: body
+          description: Model instance data
+          required: false
+          schema:
+            $ref: '#/definitions/item'
+      responses:
+        '200':
+          description: Request was successful
+          schema:
+            $ref: '#/definitions/item'
+      deprecated: false
+    put:
+      tags:
+        - item
+      summary: Update an existing model instance or insert a new one into the data source.
+      operationId: item.upsert
+      parameters:
+        - name: data
+          in: body
+          description: Model instance data
+          required: false
+          schema:
+            $ref: '#/definitions/item'
+      responses:
+        '200':
+          description: Request was successful
+          schema:
+            $ref: '#/definitions/item'
+      deprecated: false
+    get:
+      tags:
+        - item
+      summary: Find all instances of the model matched by filter from the data source.
+      operationId: item.find
+      parameters:
+        - name: filter
+          in: query
+          description: 'Filter defining fields, where, include, order, offset, and limit'
+          required: false
+          type: string
+          format: JSON
+      responses:
+        '200':
+          description: Request was successful
+          schema:
+            type: array
+            items:
+              $ref: '#/definitions/item'
+      deprecated: false
+  '/items/{id}/exists':
+    get:
+      tags:
+        - item
+      summary: Check whether a model instance exists in the data source.
+      operationId: 'item.exists__get_items_{id}_exists'
+      parameters:
+        - name: id
+          in: path
+          description: Model id
+          required: true
+          type: string
+          format: JSON
+      responses:
+        '200':
+          description: Request was successful
+          schema:
+            type: object
+      deprecated: false
+  '/items/{id}':
+    head:
+      tags:
+        - item
+      summary: Check whether a model instance exists in the data source.
+      operationId: 'item.exists__head_items_{id}'
+      parameters:
+        - name: id
+          in: path
+          description: Model id
+          required: true
+          type: string
+          format: JSON
+      responses:
+        '200':
+          description: Request was successful
+          schema:
+            type: object
+      deprecated: false
+    get:
+      tags:
+        - item
+      summary: Find a model instance by id from the data source.
+      operationId: item.findById
+      parameters:
+        - name: id
+          in: path
+          description: Model id
+          required: true
+          type: string
+          format: JSON
+        - name: filter
+          in: query
+          description: Filter defining fields and include
+          required: false
+          type: string
+          format: JSON
+      responses:
+        '200':
+          description: Request was successful
+          schema:
+            $ref: '#/definitions/item'
+      deprecated: false
+    delete:
+      tags:
+        - item
+      summary: Delete a model instance by id from the data source.
+      operationId: item.deleteById
+      parameters:
+        - name: id
+          in: path
+          description: Model id
+          required: true
+          type: string
+          format: JSON
+      responses:
+        '200':
+          description: Request was successful
+          schema:
+            type: object
+      deprecated: false
+    put:
+      tags:
+        - item
+      summary: Update attributes for a model instance and persist it into the data source.
+      operationId: item.prototype.updateAttributes
+      parameters:
+        - name: data
+          in: body
+          description: An object of model property name/value pairs
+          required: false
+          schema:
+            $ref: '#/definitions/item'
+        - name: id
+          in: path
+          description: PersistedModel id
+          required: true
+          type: string
+          format: JSON
+      responses:
+        '200':
+          description: Request was successful
+          schema:
+            $ref: '#/definitions/item'
+      deprecated: false
+  /items/findOne:
+    get:
+      tags:
+        - item
+      summary: Find first instance of the model matched by filter from the data source.
+      operationId: item.findOne
+      parameters:
+        - name: filter
+          in: query
+          description: 'Filter defining fields, where, include, order, offset, and limit'
+          required: false
+          type: string
+          format: JSON
+      responses:
+        '200':
+          description: Request was successful
+          schema:
+            $ref: '#/definitions/item'
+      deprecated: false
+  /items/update:
+    post:
+      tags:
+        - item
+      summary: Update instances of the model matched by where from the data source.
+      operationId: item.updateAll
+      parameters:
+        - name: where
+          in: query
+          description: Criteria to match model instances
+          required: false
+          type: string
+          format: JSON
+        - name: data
+          in: body
+          description: An object of model property name/value pairs
+          required: false
+          schema:
+            $ref: '#/definitions/item'
+      responses:
+        '200':
+          description: Request was successful
+          schema:
+            description: The number of instances updated
+            type: object
+      deprecated: false
+  /items/count:
+    get:
+      tags:
+        - item
+      summary: Count instances of the model matched by where from the data source.
+      operationId: item.count
+      parameters:
+        - name: where
+          in: query
+          description: Criteria to match model instances
+          required: false
+          type: string
+          format: JSON
+      responses:
+        '200':
+          description: Request was successful
+          schema:
+            type: object
+      deprecated: false
+  /items/change-stream:
+    post:
+      tags:
+        - item
+      summary: Create a change stream.
+      operationId: item.createChangeStream__post_items_change-stream
+      parameters:
+        - name: options
+          in: formData
+          required: false
+          type: string
+          format: JSON
+      responses:
+        '200':
+          description: Request was successful
+          schema:
+            type: object
+      deprecated: false
+    get:
+      tags:
+        - item
+      summary: Create a change stream.
+      operationId: item.createChangeStream__get_items_change-stream
+      parameters:
+        - name: options
+          in: query
+          required: false
+          type: string
+          format: JSON
+      responses:
+        '200':
+          description: Request was successful
+          schema:
+            type: object
+      deprecated: false
+definitions:
+  review:
+    properties:
+      date:
+        type: string
+        format: date
+      reviewer_name:
+        type: string
+      reviewer_email:
+        type: string
+      comment:
+        type: string
+      rating:
+        type: number
+        format: double
+      id:
+        $ref: '#/definitions/ObjectID'
+      itemId:
+        type: number
+        format: double
+    required:
+      - date
+      - rating
+    additionalProperties: false
+  item:
+    properties:
+      name:
+        description: item name
+        type: string
+      description:
+        description: item description
+        type: string
+      img:
+        description: location of item image
+        type: string
+      img_alt:
+        description: item image title
+        type: string
+      price:
+        description: item price
+        type: number
+        format: double
+      rating:
+        description: item rating
+        type: number
+        format: double
+      id:
+        type: number
+        format: double
+    required:
+      - name
+      - description
+      - img
+      - img_alt
+      - price
+    additionalProperties: false
+  ObjectID:
+    type: string
+    pattern: "^[a-fA-F\\d]{24}$"
+swagger: '2.0'
+info:
+  x-ibm-name: inventory
+  version: 1.0.0
+  title: inventory
+schemes:
+  - https
+basePath: /inventory
+consumes:
+  - application/json
+produces:
+  - application/json
+securityDefinitions:
+  oauth:
+    type: oauth2
+    description: Resource Owner Password Grant Type
+    flow: password
+    scopes:
+      inventory: Access to all inventory resources
+    tokenUrl: 'https://api.think.ibm/demo/sb/oauth20/token'
+  clientIdHeader:
+    type: apiKey
+    in: header
+    name: X-IBM-Client-Id
+  clientSecretHeader:
+    in: header
+    name: X-IBM-Client-Secret
+    type: apiKey
+security:
+  - clientIdHeader: []
+    clientSecretHeader: []
+    oauth:
+      - inventory
+x-ibm-configuration:
+  testable: true
+  enforced: true
+  cors:
+    enabled: true
+  gateway: datapower-gateway
+  catalogs:
+    apic-dev:
+      properties:
+        runtime-url: $(TARGET_URL)
+    sb:
+      properties:
+        runtime-url: 'http://localhost:4001'
+    Sandbox:
+      properties:
+        app-server: 'http://appsvr.think.ibm'
+        app-id: Inventory-570d6422e4b00436c05ccde2-1460495499031.sales
+  assembly:
+    execute:
+      - activity-log:
+          title: activity-log
+          content: payload
+          error-content: payload
+      - set-variable:
+          title: set-variable
+          actions:
+            - set: message.headers.Host
+              value: $(app-id)
+      - invoke:
+          target-url: $(app-server)$(request.path)
+          output: message
+  properties:
+    app-id:
+      value: 'null'
+      description: Inventory application id
+      encoded: false
+    app-server:
+      value: 'http://localhost/'
+      description: Catalog-specific app server URL
+      encoded: false
