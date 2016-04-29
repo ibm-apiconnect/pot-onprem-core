@@ -1,13 +1,13 @@
 #!/bin/sh
 
-echo "001-fix-update_pot: Update the Script: update_pot to Version 3"
-if grep -q "Version: 3" ~/bin/update_pot
+echo "001-fix-update_pot: Update the Script: update_pot to Version 4"
+if grep -q "Version: 4" ~/bin/update_pot
 then
-	echo "update_pot is at Version 3 already"
+	echo "update_pot is at Version 4 already"
 	exit 0
 else	
-	cp ~/.pot/apic-pot/env_setup/update_pot_v3 ~/bin/update_pot
-	echo "re-cloning with new v3 repo"
+	cp ~/.pot/apic-pot/env_setup/update_pot_v4 ~/bin/update_pot
+	echo "re-cloning with new v4 repo"
 	echo `update_pot clone`
 fi
 
