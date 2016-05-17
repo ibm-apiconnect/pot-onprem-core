@@ -547,7 +547,6 @@ x-ibm-configuration:
               value: $(app-id)
       - invoke:
           target-url: $(app-server)$(request.path)
-          output: message
   properties:
     app-id:
       value: 'null'
