@@ -37,8 +37,8 @@ run_diff(){
     if [[ $lab_num -gt 3 && $i = "definitions/inventory.yaml" ]]
       then
         printf "maintaining your app-id\n"
-        student_appid=`grep "app-id: " $student_dir$i | cut -c16-`
-        old_appid=`grep "app-id: " $complete_dir$i | cut -c16-`
+        student_appid=`grep "app-id:" $student_dir$i | cut -c17-`
+        old_appid=`grep "app-id:" $complete_dir$i | cut -c17-`
         echo `sed -i s/$old_appid/$student_appid/ $complete_dir$i`
     fi
     result=$(diff $student_dir$i $complete_dir$i)
