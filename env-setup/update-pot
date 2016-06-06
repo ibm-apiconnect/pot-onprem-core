@@ -21,15 +21,15 @@ fi
 
 show_help() {
   printf "\n"
-  printf "Usage: update-pot -v VERSION -c COMMAND \n"
+  printf "Usage:        update-pot -v VERSION -c COMMAND \n"
   printf "\n"
   printf "Versions:     consult lab guide\n"
   printf "\n"
   printf "Commands:\n"
-  printf "   clone      does a full clone of the GIT repo to ~/.pot\n"
-  printf "   patch      clones GIT repo and runs all scripts found in ~/.pot/apic-pot/env-setup/patch-scripts\n"
-  printf "   labs       clones GIT and installs and configures lab files\n"
-  printf "   services   clones GIT and installs and configures stub services\n"
+  printf "   clone      does a full clone of the GIT repositories to ~/.pot\n"
+  printf "   patch      clones GIT repositories and runs all scripts found in ~/.pot/apic-pot/env-setup/patch-scripts\n"
+  printf "   labs       clones GIT repositories and installs and configures lab files\n"
+  printf "   services   clones GIT repositories and installs and configures stub services\n"
   printf "   all        performs a clone, patch, labs and services in sequence\n"
   printf "\n"
 }
