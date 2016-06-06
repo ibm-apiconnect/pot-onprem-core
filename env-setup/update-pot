@@ -7,7 +7,10 @@ OPTIND=1         # Reset in case getopts has been used previously in the shell.
 
 POTDIR=~/.pot
 SCRIPTDIR=~/.pot/core/env-setup/update-scripts
-VERSION=""
+CORE_GIT_REPO="https://github.com/ibm-apiconnect/pot-onprem-core.git"
+SVCS_GIT_REPO="https://github.com/ibm-apiconnect/pot-onprem-services.git"
+CONS_GIT_REPO="https://github.com/ibm-apiconnect/pot-onprem-consumer.git"
+GIT_BRANCH=""
 now=$(date +"%m_%d_%Y")
 log="/tmp/update-pot.log"
 
@@ -37,7 +40,11 @@ clone() {
   printf "\n"
   date | tee -a "$log"
 
-  echo `$SCRIPTDIR/clone -v $VERSION`
+  rm -rf $POTDIR/*
+
+  git clone -b $GIT_BRANCH $CORE_GIT_REPO $POTDIR/core
+  git clone -b $GIT_BRANCH $SVCS_GIT_REPO $POTDIR/services
+  git clone -b $GIT_BRANCH $CONS_GIT_REPO $POTDIR/consumer
 }
 
 patch() {
@@ -59,7 +66,7 @@ while getopts ":hc:v:" opt; do
       exit 0
       ;;
     v)
-      VERSION=$OPTARG
+      GIT_BRANCH=$OPTARG
       ;;
     c)
       case "$OPTARG" in
