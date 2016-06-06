@@ -1,0 +1,6 @@
+#!/bin/sh
+
+echo "006-force-liberty-restart-script"
+cp ~/.pot/core/env-setup/system-scripts/force-liberty-restart ~/bin/force-liberty-restart
+chmod 775 ~/bin/force-liberty-restart
+exit $?

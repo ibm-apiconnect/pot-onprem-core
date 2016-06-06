@@ -1,0 +1,8 @@
+#!/usr/bin/env bash
+
+rm -rf ~/lab_files ~/lab-files
+cp -R ~/.pot/core/lab-files ~/lab-files
+rm -rf ~/lab-files/.git
+rm -rf ~/lab-files/.gitignore
+rm -rf ~/lab-files/LICENSE
+rm -rf ~/lab-files/README.md

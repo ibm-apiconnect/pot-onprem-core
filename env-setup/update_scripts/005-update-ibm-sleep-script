@@ -1,8 +1,0 @@
-#!/bin/sh
-
-echo "005-update-ibm-sleep-script: Updating script to restart liberty after OS resume"
-echo Passw0rd! | sudo -S cp ~/.pot/apic-pot/env-setup/ibm_sleep/ibm_sleep /etc/pm/sleep.d/ibm_sleep
-echo Passw0rd! | sudo -S chmod 775 /etc/pm/sleep.d/ibm_sleep
-cp ~/.pot/apic-pot/env-setup/ibm_sleep/force-liberty-restart ~/bin/force-liberty-restart
-chmod 775 ~/bin/force-liberty-restart
-exit $?

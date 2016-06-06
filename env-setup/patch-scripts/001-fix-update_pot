@@ -1,0 +1,14 @@
+#!/bin/sh
+
+echo "001-fix-update_pot: Update the update_pot script"
+if grep -q "Version: 5010" ~/bin/update-pot
+then
+	echo "update-pot is at Version 5010 already"
+	exit 0
+else
+	cp ~/.pot/core/env-setup/update-pot ~/bin/update-pot
+	chmod 775 ~/.pot/core/env-setup/update-scripts/*
+	chmod 775 ~/.pot/core/env-setup/patch-scripts/*
+fi
+
+exit $?

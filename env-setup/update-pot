@@ -1,0 +1,97 @@
+#!/bin/sh
+
+# Version: 5010
+# Version Fix: Rework for 5010, add support for PoT version branch
+
+OPTIND=1         # Reset in case getopts has been used previously in the shell.
+
+POTDIR=~/.pot
+SCRIPTDIR=~/.pot/core/env-setup/update-scripts
+VERSION=""
+now=$(date +"%m_%d_%Y")
+log="/tmp/update-pot.log"
+
+if [ ! -d "$POTDIR" ]
+then
+  mkdir $POTDIR
+fi
+
+show_help() {
+  printf "\n"
+  printf "Usage: update-pot -v VERSION -c COMMAND \n"
+  printf "\n"
+  printf "Versions:     consult lab guide\n"
+  printf "\n"
+  printf "Commands:\n"
+  printf "   clone      does a full clone of the GIT repo to ~/.pot\n"
+  printf "   patch      clones GIT repo and runs all scripts found in ~/.pot/apic-pot/env-setup/patch-scripts\n"
+  printf "   labs       clones GIT and installs and configures lab files\n"
+  printf "   services   clones GIT and installs and configures stub services\n"
+  printf "   all        performs a clone, patch, labs and services in sequence\n"
+  printf "\n"
+}
+
+clone() {
+  printf "\n"
+  printf "Starting update-pot: Logging to $log...\n"
+  printf "\n"
+  date | tee -a "$log"
+
+  echo `$SCRIPTDIR/clone -v $VERSION`
+}
+
+patch() {
+  echo `$SCRIPTDIR/patch`
+}
+
+labs () {
+  echo `$SCRIPTDIR/labs`
+}
+
+services () {
+  echo `$SCRIPTDIR/services`
+}
+
+while getopts ":hc:v:" opt; do
+    case "$opt" in
+    h)
+      show_help
+      exit 0
+      ;;
+    v)
+      VERSION=$OPTARG
+      ;;
+    c)
+      case "$OPTARG" in
+        clone)
+          clone | tee -a "$log"
+          ;;
+        patch)
+          clone | tee -a "$log"
+          patch | tee -a "$log"
+          ;;
+        labs)
+          clone | tee -a "$log"
+          labs  | tee -a "$log"
+          ;;
+        services)
+          clone | tee -a "$log"
+          services  | tee -a "$log"
+          ;;
+        all)
+          clone | tee -a "$log"
+          patch | tee -a "$log"
+          labs  | tee -a "$log"
+          services  | tee -a "$log"
+          ;;
+      esac
+      ;;
+    \?)
+      echo "Invalid option: -$OPTARG" >&2
+      ;;
+    esac
+done
+
+shift $((OPTIND-1))
+
+[ "$1" = "--" ] && shift

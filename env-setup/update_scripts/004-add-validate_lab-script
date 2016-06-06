@@ -1,8 +1,0 @@
-#!/bin/sh
-
-echo "004-add-validate_lab-script: Adding the validate_lab script to ~/bin"
-cp ~/.pot/apic-pot/env-setup/validate_lab/validate_lab ~/bin/validate_lab
-cp ~/.pot/apic-pot/env-setup/validate_lab/merge_lab ~/bin/merge_lab
-chmod +x ~/bin/validate_lab
-chmod +x ~/bin/merge_lab
-exit $?

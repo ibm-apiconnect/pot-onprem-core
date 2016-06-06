@@ -1,0 +1,10 @@
+#!/bin/sh
+
+echo "005-add-ibm-sleep-script"
+if [ -e "/etc/pm/sleep.d/ibm_sleep" ]
+then
+  echo Passw0rd! | sudo -S rm /etc/pm/sleep.d/ibm_sleep
+fi
+echo Passw0rd! | sudo -S cp ~/.pot/core/env-setup/system-scripts/ibm-sleep /etc/pm/sleep.d/ibm-sleep
+echo Passw0rd! | sudo -S chmod 775 /etc/pm/sleep.d/ibm-sleep
+exit $?
