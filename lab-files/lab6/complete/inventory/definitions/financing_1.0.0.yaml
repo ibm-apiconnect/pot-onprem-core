@@ -125,7 +125,7 @@ x-ibm-configuration:
             - set: output.Envelope.Body.financingRequest.rate
               from: rate
       - invoke:
-          target-url: 'https://services.think.ibm:1443/financing'
+          target-url: 'https://services.think.ibm:1443/financing/calculate'
           verb: POST
       - gatewayscript:
           title: gatewayscript
