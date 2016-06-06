@@ -1,6 +1,7 @@
 #!/usr/bin/env bash
 
 PATCHSCRIPTS=~/.pot/core/env-setup/patch-scripts
+log="/tmp/update-pot.log"
 
 if [ "$(ls -A $PATCHSCRIPTS)" ]
   then
