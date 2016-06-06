@@ -250,10 +250,8 @@ definitions:
   shipping:
     properties:
       xyz:
-        type: string
         $ref: '#/definitions/rates'
       cek:
-        type: string
         $ref: '#/definitions/rates'
     required:
       - xyz
