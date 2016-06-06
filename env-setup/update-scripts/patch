@@ -16,14 +16,12 @@ for SCRIPT in "${PATCHSCRIPTS}/"*
         ;;
       *)
         if [ -f "${SCRIPT}" -a -x "${SCRIPT}" ]; then
-          printf "Starting Script:${SCRIPT}\n";
-          printf "\n";
+          printf "Starting Script:${SCRIPT}\n"
+          printf "\n"
           "${SCRIPT}" $@ >> "$log"
-          #echo $?;
           if [ $? -ne 0 ]; then
-            printf "ERROR with ${SCRIPT}\n";
-            printf "\n";
-            #break;
+            printf "ERROR with ${SCRIPT}\n"
+            printf "\n"
           fi
         fi
         ;;
