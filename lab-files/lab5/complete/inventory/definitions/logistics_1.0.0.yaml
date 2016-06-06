@@ -30,7 +30,7 @@ x-ibm-configuration:
         runtime-url: $(TARGET_URL)
   properties:
     shipping_svc_url:
-      value: 'http://shipping.think.ibm:5000/calculate'
+      value: 'http://services.think.ibm:1080/shipping/calculate'
       description: Location of the shipping calculator service
       encoded: false
   assembly:
