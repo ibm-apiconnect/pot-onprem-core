@@ -1,0 +1,6 @@
+#!/usr/bin/env bash
+
+rm -rf ~/consumer
+cp -r ~/.pot/consumer ~/consumer
+cd ~/consumer
+npm install

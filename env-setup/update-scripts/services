@@ -1,1 +1,6 @@
 #!/usr/bin/env bash
+
+rm -rf ~/services
+cp -r ~/.pot/services ~/services
+cd ~/services
+npm install

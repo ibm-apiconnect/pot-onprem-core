@@ -29,7 +29,8 @@ show_help() {
   printf "   clone      does a full clone of the GIT repositories to ~/.pot\n"
   printf "   patch      clones GIT repositories and runs all scripts found in ~/.pot/apic-pot/env-setup/patch-scripts\n"
   printf "   labs       clones GIT repositories and installs and configures lab files\n"
-  printf "   services   clones GIT repositories and installs and configures stub services\n"
+  printf "   consumer   clones GIT repositories and installs and runs the consumer app\n"
+  printf "   services   clones GIT repositories and installs and runs the stub services\n"
   printf "   all        performs a clone, patch, labs and services in sequence\n"
   printf "\n"
 }
@@ -59,6 +60,10 @@ labs () {
   echo `$SCRIPTDIR/labs`
 }
 
+consumer () {
+  echo `$SCRIPTDIR/consumer`
+}
+
 services () {
   echo `$SCRIPTDIR/services`
 }
@@ -84,6 +89,10 @@ while getopts ":hc:v:" opt; do
         labs)
           clone | tee -a "$log"
           labs  | tee -a "$log"
+          ;;
+        consumer)
+          clone | tee -a "$log"
+          consumer  | tee -a "$log"
           ;;
         services)
           clone | tee -a "$log"
