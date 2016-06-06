@@ -2,7 +2,7 @@
 127.0.1.1 xubuntu-vm
 
 # IBM APIC HOSTS v5
-192.168.225.52 dp.think.ibm api.think.ibm services.think.ibm
+192.168.225.52 dp.think.ibm api.think.ibm
 
 192.168.225.100 mgr.think.ibm
 
