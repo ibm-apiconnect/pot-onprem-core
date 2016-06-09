@@ -2,4 +2,8 @@
 
 # Target version for 5010:  2.0.18
 
+printf "Please be patient, this will take a while.\n"
+printf "If prompted for a password, ignore the message and continue to wait.\n"
+printf "\n"
+
 echo Passw0rd! | sudo -S npm install -g --unsafe-perm apiconnect@2.0.18
