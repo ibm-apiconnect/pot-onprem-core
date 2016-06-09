@@ -2,8 +2,11 @@
 
 echo "008-remove-old-shipping-svc"
 
-if [ -e "/etc/init/forever-shipping.conf" ]
-then
+if [ -d "/home/student/services/shipping" ]; then
+  echo Passw0rd! | sudo -S rm -rf /home/student/services/shipping
+fi
+
+if [ -e "/etc/init/forever-shipping.conf" ]; then
   echo Passw0rd! | sudo -S rm /etc/init/forever-shipping.conf
   echo Passw0rd! | sudo -S kill $(ps aux | grep node | grep shipping | awk '{print $2}')
 fi
