@@ -1,5 +1,7 @@
 #!/usr/bin/env bash
 
+# stop pot-services, uninstall, re-install, re-start
+
 echo Passw0rd! | sudo -S stop pot-services
 echo Passw0rd! | sudo -S forever-service delete pot-services
 rm -rf ~/services
