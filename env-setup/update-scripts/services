@@ -8,5 +8,5 @@ rm -rf ~/services
 cp -r ~/.pot/services ~/services
 cd ~/services
 npm install
-echo Passw0rd! | sudo -S forever-service install pot-services
+echo Passw0rd! | sudo -S forever-service install -s bin/www pot-services
 echo Passw0rd! | sudo -S start pot-services
