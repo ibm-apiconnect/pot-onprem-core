@@ -17,10 +17,10 @@ mkdir $download_dir
 cd $download_dir
 
 printf "\nDownloading IHS Package...\n"
-echo `swift download pot-collective-controller "$ihs_url"`
+echo `swift download pot-collective-controller "$ihs_fn"`
 
 printf "\nDownloading IHS Plugin Package...\n"
-echo `swift download pot-collective-controller "$plugin_url"`
+echo `swift download pot-collective-controller "$plugin_fn"`
 
 printf "\nDownloading Collective Controller Package...\n"
 echo `swift download pot-collective-controller "$collective_controller_fn"`
