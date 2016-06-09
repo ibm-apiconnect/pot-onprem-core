@@ -8,8 +8,6 @@ OPTIND=1         # Reset in case getopts has been used previously in the shell.
 POTDIR=~/.pot
 SCRIPTDIR=~/.pot/core/env-setup/update-scripts
 CORE_GIT_REPO="https://github.com/ibm-apiconnect/pot-onprem-core.git"
-SVCS_GIT_REPO="https://github.com/ibm-apiconnect/pot-services.git"
-CONS_GIT_REPO="https://github.com/ibm-apiconnect/pot-consumer.git"
 GIT_BRANCH=""
 now=$(date +"%m_%d_%Y")
 log="/tmp/update-pot.log"
@@ -21,19 +19,18 @@ fi
 
 show_help() {
   printf "\n"
-  printf "Usage:                    update-pot -v VERSION -c COMMAND \n"
+  printf "Usage:                update-pot -v VERSION [-c COMMAND] \n"
   printf "\n"
-  printf "Versions:                 consult lab guide\n"
+  printf "Versions:             consult lab guide for version number\n"
   printf "\n"
   printf "Commands:\n"
-  printf "   clone                  clones the core GIT repository to ~/.pot\n"
-  printf "   patch                  runs all scripts found in ~/.pot/apic-pot/env-setup/patch-scripts\n"
-  printf "   labs                   installs and configures lab files\n"
-  printf "   consumer               clones the consumer GIT repository and installs and runs the consumer app\n"
-  printf "   services               clones the services GIT repository and installs and runs the stub services\n"
-  printf "   clean-collective       uninstalls and removes collective - REQUIRES RESTART\n"
-  printf "   configure-collective   updates the collective for the current version - MUST clean-collective FIRST\n"
-  printf "   toolkit                installs the apic developer toolkit\n"
+  printf "   patch              runs all scripts found in ~/.pot/apic-pot/env-setup/patch-scripts\n"
+  printf "   labs               installs and configures lab files\n"
+  printf "   consumer           clones the consumer GIT repository and installs and runs the consumer app\n"
+  printf "   services           clones the services GIT repository and installs and runs the stub services\n"
+  printf "   toolkit            installs the apic developer toolkit\n"
+  printf "   clean-collective   uninstalls and removes collective - FORCES RESTART\n"
+  printf "   setup-collective   updates the collective for the current version - MUST USE clean-collective FIRST\n"
   printf "\n"
 }
 
@@ -52,22 +49,6 @@ clone() {
   chmod 775 $POTDIR/core/env-setup/update-scripts/*
 }
 
-patch() {
-  echo `$SCRIPTDIR/patch`
-}
-
-labs () {
-  echo `$SCRIPTDIR/labs`
-}
-
-consumer () {
-  echo `$SCRIPTDIR/consumer -v $GIT_BRANCH`
-}
-
-services () {
-  echo `$SCRIPTDIR/services -v $GIT_BRANCH`
-}
-
 while getopts ":hc:v:" opt; do
     case "$opt" in
     h)
@@ -76,27 +57,30 @@ while getopts ":hc:v:" opt; do
       ;;
     v)
       GIT_BRANCH=$OPTARG
+      clone | tee -a "$log"
       ;;
     c)
       case "$OPTARG" in
-        clone)
-          clone | tee -a "$log"
-          ;;
         patch)
-          clone | tee -a "$log"
-          patch | tee -a "$log"
+          echo `$SCRIPTDIR/patch` | tee -a "$log"
           ;;
         labs)
-          clone | tee -a "$log"
-          labs  | tee -a "$log"
+          echo `$SCRIPTDIR/labs` | tee -a "$log"
           ;;
         consumer)
-          clone | tee -a "$log"
-          consumer  | tee -a "$log"
+          echo `$SCRIPTDIR/consumer -v $GIT_BRANCH` | tee -a "$log"
           ;;
         services)
-          clone | tee -a "$log"
-          services  | tee -a "$log"
+          echo `$SCRIPTDIR/services -v $GIT_BRANCH` | tee -a "$log"
+          ;;
+        toolkit)
+          echo `$SCRIPTDIR/toolkit` | tee -a "$log"
+          ;;
+        clean-collective)
+          echo `$SCRIPTDIR/clean-collective` | tee -a "$log"
+          ;;
+        setup-collective)
+          echo `$SCRIPTDIR/setup-collective` | tee -a "$log"
           ;;
       esac
       ;;

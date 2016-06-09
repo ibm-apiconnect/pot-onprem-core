@@ -1,0 +1,18 @@
+#!/usr/bin/env bash
+
+# Clean up Liberty and IHS
+clear
+printf "\nCleaning Config...\n"
+echo Passw0rd! | sudo -S wlpn-controller stop || true
+echo Passw0rd! | sudo -S /opt/IBM/HTTPServer/bin/apachectl -k stop
+echo Passw0rd! | sudo -S killall -9 node || true
+echo Passw0rd! | sudo -S killall -9 java || true
+echo Passw0rd! | sudo -S rm -rf ~/wlpn
+echo Passw0rd! | sudo -S rm -rf ~/.liberty
+echo Passw0rd! | sudo -S rm -rf /opt/IBM
+echo Passw0rd! | sudo -S npm uninstall -g apiconnect-collective-controller
+echo Passw0rd! | sudo -S npm uninstall -g apiconnect-collective-member
+
+printf "\nClean Complete... restarting!\n"
+
+echo Passw0rd! | sudo -S reboot

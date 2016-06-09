@@ -23,7 +23,7 @@ services() {
 
   # Install new source
   cd ~/services
-  npm install
+  npm install --silent
 
   # Register start server
   echo Passw0rd! | sudo -S forever-service install -s bin/www pot-services
