@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 
-complete_dir=~/lab_files/lab$1/complete/inventory/
+complete_dir=~/lab-files/lab$1/complete/inventory/
 student_dir=~/ThinkIBM/inventory/
 files=()
 lab_num=$1
