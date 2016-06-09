@@ -1,11 +1,11 @@
 #!/bin/sh
 
-echo "008-remove-forever-init-script"
+echo "008-remove-old-shipping-svc"
 
 if [ -e "/etc/init/forever-shipping.conf" ]
 then
   echo Passw0rd! | sudo -S rm /etc/init/forever-shipping.conf
-  # ps aux | grep '[p]ython csp_build.py' | awk '{print $2}'
+  echo Passw0rd! | sudo -S kill $(ps aux | grep node | grep shipping | awk '{print $2}')
 fi
 
 exit $?
