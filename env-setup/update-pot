@@ -17,7 +17,7 @@ printf "\n"
 printf "Please be patient, this may take a while.\n"
 printf "If prompted for a password, ignore the message and continue to wait.\n"
 printf "\n"
-
+sleep 3
 
 if [ ! -d "$POTDIR" ]
 then
