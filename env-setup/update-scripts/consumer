@@ -8,5 +8,5 @@ rm -rf ~/consumer
 cp -r ~/.pot/consumer ~/consumer
 cd ~/consumer
 npm install
-echo Passw0rd! | sudo -S forever-service install pot-consumer
+echo Passw0rd! | sudo -S forever-service install -s bin/www pot-consumer
 echo Passw0rd! | sudo -S start pot-consumer
