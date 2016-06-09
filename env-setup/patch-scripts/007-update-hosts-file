@@ -1,6 +1,0 @@
-#!/bin/sh
-
-echo "007-update-hosts-file"
-echo Passw0rd! | sudo -S cp ~/.pot/core/env-setup/system-scripts/hosts /etc/hosts
-echo Passw0rd! | sudo -S chmod 644 /etc/hosts
-exit $?
