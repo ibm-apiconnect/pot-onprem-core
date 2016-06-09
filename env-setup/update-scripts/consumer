@@ -1,6 +1,10 @@
 #!/usr/bin/env bash
 
+echo Passw0rd! | sudo -S stop pot-consumer
+echo Passw0rd! | sudo -S forever-service delete pot-consumer
 rm -rf ~/consumer
 cp -r ~/.pot/consumer ~/consumer
 cd ~/consumer
 npm install
+echo Passw0rd! | sudo -S forever-service install pot-consumer
+echo Passw0rd! | sudo -S start pot-consumer

@@ -1,0 +1,11 @@
+#!/bin/sh
+
+echo "008-remove-forever-init-script"
+
+if [ -e "/etc/init/forever-shipping.conf" ]
+then
+  echo Passw0rd! | sudo -S rm /etc/init/forever-shipping.conf
+  # ps aux | grep '[p]ython csp_build.py' | awk '{print $2}'
+fi
+
+exit $?
