@@ -21,17 +21,19 @@ fi
 
 show_help() {
   printf "\n"
-  printf "Usage:        update-pot -v VERSION -c COMMAND \n"
+  printf "Usage:                    update-pot -v VERSION -c COMMAND \n"
   printf "\n"
-  printf "Versions:     consult lab guide\n"
+  printf "Versions:                 consult lab guide\n"
   printf "\n"
   printf "Commands:\n"
-  printf "   clone      does a full clone of the GIT repositories to ~/.pot\n"
-  printf "   patch      clones GIT repositories and runs all scripts found in ~/.pot/apic-pot/env-setup/patch-scripts\n"
-  printf "   labs       clones GIT repositories and installs and configures lab files\n"
-  printf "   consumer   clones GIT repositories and installs and runs the consumer app\n"
-  printf "   services   clones GIT repositories and installs and runs the stub services\n"
-  printf "   all        performs a clone, patch, labs and services in sequence\n"
+  printf "   clone                  clones the core GIT repository to ~/.pot\n"
+  printf "   patch                  runs all scripts found in ~/.pot/apic-pot/env-setup/patch-scripts\n"
+  printf "   labs                   installs and configures lab files\n"
+  printf "   consumer               clones the consumer GIT repository and installs and runs the consumer app\n"
+  printf "   services               clones the services GIT repository and installs and runs the stub services\n"
+  printf "   clean-collective       uninstalls and removes collective - REQUIRES RESTART\n"
+  printf "   configure-collective   updates the collective for the current version - MUST clean-collective FIRST\n"
+  printf "   toolkit                installs the apic developer toolkit\n"
   printf "\n"
 }
 
@@ -44,8 +46,6 @@ clone() {
   rm -rf $POTDIR/*
 
   git clone -b $GIT_BRANCH $CORE_GIT_REPO $POTDIR/core
-  git clone -b $GIT_BRANCH $SVCS_GIT_REPO $POTDIR/services
-  git clone -b $GIT_BRANCH $CONS_GIT_REPO $POTDIR/consumer
 
   chmod 775 $POTDIR/core/env-setup/patch-scripts/*
   chmod 775 $POTDIR/core/env-setup/system-scripts/*
@@ -61,11 +61,11 @@ labs () {
 }
 
 consumer () {
-  echo `$SCRIPTDIR/consumer`
+  echo `$SCRIPTDIR/consumer -v $GIT_BRANCH`
 }
 
 services () {
-  echo `$SCRIPTDIR/services`
+  echo `$SCRIPTDIR/services -v $GIT_BRANCH`
 }
 
 while getopts ":hc:v:" opt; do
@@ -96,12 +96,6 @@ while getopts ":hc:v:" opt; do
           ;;
         services)
           clone | tee -a "$log"
-          services  | tee -a "$log"
-          ;;
-        all)
-          clone | tee -a "$log"
-          patch | tee -a "$log"
-          labs  | tee -a "$log"
           services  | tee -a "$log"
           ;;
       esac

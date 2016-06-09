@@ -1,12 +1,48 @@
 #!/usr/bin/env bash
 
-# stop pot-services, uninstall, re-install, re-start
+OPTIND=1         # Reset in case getopts has been used previously in the shell.
 
-echo Passw0rd! | sudo -S stop pot-services
-echo Passw0rd! | sudo -S forever-service delete pot-services
-rm -rf ~/services
-cp -r ~/.pot/services ~/services
-cd ~/services
-npm install
-echo Passw0rd! | sudo -S forever-service install -s bin/www pot-services
-echo Passw0rd! | sudo -S start pot-services
+POTDIR=~/.pot
+CONS_GIT_REPO="https://github.com/ibm-apiconnect/pot-services.git"
+GIT_BRANCH=""
+
+services() {
+
+  # Stop & unregister server
+  echo Passw0rd! | sudo -S stop pot-services
+  echo Passw0rd! | sudo -S forever-service delete pot-services
+
+  # Remove old source files
+  rm -rf ~/services $POTDIR/services
+
+  # Re-clone new package
+  git clone -b $GIT_BRANCH $CONS_GIT_REPO $POTDIR/services
+
+  # Copy source to new location
+  cp -r ~/.pot/services ~/services
+
+  # Install new source
+  cd ~/services
+  npm install
+
+  # Register start server
+  echo Passw0rd! | sudo -S forever-service install -s bin/www pot-services
+  echo Passw0rd! | sudo -S start pot-services
+
+}
+
+while getopts ":v:" opt; do
+    case "$opt" in
+    v)
+      GIT_BRANCH=$OPTARG
+      services
+      ;;
+    \?)
+      echo "Invalid option: -$OPTARG" >&2
+      ;;
+    esac
+done
+
+shift $((OPTIND-1))
+
+[ "$1" = "--" ] && shift

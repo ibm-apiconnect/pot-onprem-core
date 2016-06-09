@@ -1,12 +1,48 @@
 #!/usr/bin/env bash
 
-# stop pot-consumer, uninstall, re-install, re-start
+OPTIND=1         # Reset in case getopts has been used previously in the shell.
 
-echo Passw0rd! | sudo -S stop pot-consumer
-echo Passw0rd! | sudo -S forever-service delete pot-consumer
-rm -rf ~/consumer
-cp -r ~/.pot/consumer ~/consumer
-cd ~/consumer
-npm install
-echo Passw0rd! | sudo -S forever-service install -s bin/www pot-consumer
-echo Passw0rd! | sudo -S start pot-consumer
+POTDIR=~/.pot
+CONS_GIT_REPO="https://github.com/ibm-apiconnect/pot-consumer.git"
+GIT_BRANCH=""
+
+consumer() {
+
+  # Stop & unregister server
+  echo Passw0rd! | sudo -S stop pot-consumer
+  echo Passw0rd! | sudo -S forever-service delete pot-consumer
+
+  # Remove old source files
+  rm -rf ~/consumer $POTDIR/consumer
+
+  # Re-clone new package
+  git clone -b $GIT_BRANCH $CONS_GIT_REPO $POTDIR/consumer
+
+  # Copy source to new location
+  cp -r ~/.pot/consumer ~/consumer
+
+  # Install new source
+  cd ~/consumer
+  npm install
+
+  # Register start server
+  echo Passw0rd! | sudo -S forever-service install -s bin/www pot-consumer
+  echo Passw0rd! | sudo -S start pot-consumer
+
+}
+
+while getopts ":v:" opt; do
+    case "$opt" in
+    v)
+      GIT_BRANCH=$OPTARG
+      consumer
+      ;;
+    \?)
+      echo "Invalid option: -$OPTARG" >&2
+      ;;
+    esac
+done
+
+shift $((OPTIND-1))
+
+[ "$1" = "--" ] && shift
