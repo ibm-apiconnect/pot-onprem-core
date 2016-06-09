@@ -12,6 +12,13 @@ GIT_BRANCH=""
 now=$(date +"%m_%d_%Y")
 log="/tmp/update-pot.log"
 
+clear
+printf "\n"
+printf "Please be patient, this may take a while.\n"
+printf "If prompted for a password, ignore the message and continue to wait.\n"
+printf "\n"
+
+
 if [ ! -d "$POTDIR" ]
 then
   mkdir $POTDIR

@@ -6,12 +6,6 @@ POTDIR=~/.pot
 CONS_GIT_REPO="https://github.com/ibm-apiconnect/pot-consumer.git"
 GIT_BRANCH=""
 
-
-printf "Please be patient, this will take a while.\n"
-printf "If prompted for a password, ignore the message and continue to wait.\n"
-printf "\n"
-
-
 consumer() {
 
   # Stop & unregister server
