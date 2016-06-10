@@ -21,7 +21,7 @@ merge_lab4(){
 }
 
 merge_lab5(){
-  files=(definitions/financing_1.0.0.yaml definitions/logistics_1.0.0.yaml)
+  files=(definitions/financing_1.0.0.yaml api_logistics.yaml)
   run_merge
 }
 
