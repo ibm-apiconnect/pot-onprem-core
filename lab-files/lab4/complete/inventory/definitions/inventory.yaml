@@ -533,7 +533,7 @@ x-ibm-configuration:
     Sandbox:
       properties:
         app-server: 'http://appsvr.think.ibm'
-        app-id: Inventory-570d6422e4b00436c05ccde2-1460495499031.sales
+        app-id: inventory-575b0515e4b0ed41765c7fdb-1465583261860.sales
   assembly:
     execute:
       - activity-log:
