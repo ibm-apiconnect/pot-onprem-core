@@ -164,6 +164,10 @@ paths:
           description: Request was successful
           schema:
             type: object
+            properties:
+              count:
+                type: number
+                format: double
       deprecated: false
   /items:
     post:
@@ -240,6 +244,9 @@ paths:
           description: Request was successful
           schema:
             type: object
+            properties:
+              exists:
+                type: boolean
       deprecated: false
   '/items/{id}':
     head:
@@ -259,6 +266,9 @@ paths:
           description: Request was successful
           schema:
             type: object
+            properties:
+              exists:
+                type: boolean
       deprecated: false
     get:
       tags:
@@ -389,6 +399,10 @@ paths:
           description: Request was successful
           schema:
             type: object
+            properties:
+              count:
+                type: number
+                format: double
       deprecated: false
   /items/change-stream:
     post:
@@ -406,7 +420,7 @@ paths:
         '200':
           description: Request was successful
           schema:
-            type: object
+            type: file
       deprecated: false
     get:
       tags:
@@ -423,7 +437,7 @@ paths:
         '200':
           description: Request was successful
           schema:
-            type: object
+            type: file
       deprecated: false
 definitions:
   x-any:
@@ -516,7 +530,6 @@ x-ibm-configuration:
   enforced: true
   cors:
     enabled: true
-  gateway: micro-gateway
   catalogs:
     apic-dev:
       properties:
