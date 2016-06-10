@@ -2,6 +2,7 @@
   "mysql-connection": {
     "host": "mysql.think.ibm",
     "port": 3306,
+    "url": "",
     "database": "think",
     "password": "Passw0rd!",
     "name": "mysql-connection",
@@ -11,6 +12,7 @@
   "mongodb-connection": {
     "host": "mongo.think.ibm",
     "port": 27017,
+    "url": "",
     "database": "think",
     "password": "",
     "name": "mongodb-connection",
