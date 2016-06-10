@@ -43,7 +43,8 @@ x-ibm-configuration:
           title: operation-switch
           case:
             - operations:
-                - shipping.calc
+                - verb: get
+                  path: /shipping
               execute:
                 - invoke:
                     title: invoke_xyz
@@ -51,7 +52,8 @@ x-ibm-configuration:
                     verb: GET
                     cache-response: protocol
                     cache-ttl: 900
-                    target-url: '$(shipping_svc_url)?company=xyz&from_zip=90210&to_zip={zip}'
+                    target-url: >-
+                      $(shipping_svc_url)?company=xyz&from_zip=90210&to_zip={zip}
                     output: xyz_response
                 - invoke:
                     title: invoke_cek
@@ -59,7 +61,8 @@ x-ibm-configuration:
                     verb: GET
                     cache-response: protocol
                     cache-ttl: 900
-                    target-url: '$(shipping_svc_url)?company=cek&from_zip=90210&to_zip={zip}'
+                    target-url: >-
+                      $(shipping_svc_url)?company=cek&from_zip=90210&to_zip={zip}
                     output: cek_response
                 - map:
                     title: map_responses
@@ -151,30 +154,30 @@ x-ibm-configuration:
                         from: cek.rates.ground
                     description: Map responses from invoke_xyz and invoke_cek to output
             - operations:
-                - get.stores
+                - verb: get
+                  path: /stores
               execute:
                 - invoke:
-                    title: invoke_google_geolocate
+                    title: invoke_google_geocode
                     timeout: 60
                     verb: GET
                     cache-response: protocol
                     cache-ttl: 900
-                    target-url: 'https://maps.googleapis.com/maps/api/geocode/json?&address={zip}'
+                    target-url: >-
+                      https://maps.googleapis.com/maps/api/geocode/json?&address={zip}
                     output: google_geocode_response
                 - gatewayscript:
-                    title: gws-format-maps-link
+                    title: gatewayscript
                     source: >-
                       // Require API Connect Functions
 
                       var apic = require('local:///isp/policy/apim.custom.js');
 
 
-
                       // Save the Google Geocode response body to variable
 
-                      var mapsApiRsp
-                      = apic.getvariable('google_geocode_response.body');
-
+                      var mapsApiRsp =
+                      apic.getvariable('google_geocode_response.body');
 
 
                       // Get location attributes from geocode response body
@@ -182,17 +185,12 @@ x-ibm-configuration:
                       var location = mapsApiRsp.results[0].geometry.location;
 
 
-
-                      // Set up the response data object, concat the latitude and
-                      longitude
+                      // Set up the response data object, concat the latitude
+                      and longitude
 
                       var rspObj = {
-
-                        "google_maps_link": "https://www.google.com/maps?q="
-                      + location.lat + "," + location.lng
-
+                        "google_maps_link": "https://www.google.com/maps?q=" + location.lat + "," + location.lng
                       };
-
 
 
                       // Save the output
@@ -208,7 +206,6 @@ paths:
           schema:
             $ref: '#/definitions/shipping'
       summary: Calculate shipping costs to a destination zip code
-      operationId: shipping.calc
       parameters:
         - name: zip
           type: string
@@ -225,7 +222,6 @@ paths:
       tags:
         - stores
       summary: Locate store near zip code
-      operationId: get.stores
       parameters:
         - name: zip
           type: string
