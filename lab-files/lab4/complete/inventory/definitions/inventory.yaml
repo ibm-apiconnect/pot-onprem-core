@@ -522,7 +522,7 @@ securityDefinitions:
     flow: password
     scopes:
       inventory: Access to all inventory resources
-    tokenUrl: 'https://api.think.ibm/sales/sb/oauth20/token'
+    tokenUrl: 'https://api.think.ibm/sales/sb/oauth2/token'
   clientIdHeader:
     type: apiKey
     in: header
