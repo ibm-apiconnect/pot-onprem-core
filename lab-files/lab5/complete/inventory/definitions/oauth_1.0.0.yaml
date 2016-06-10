@@ -3,10 +3,9 @@ info:
   version: 1.0.0
   title: oauth
   x-ibm-name: oauth
-  description: API for Obtaining Access Tokens
-basePath: /oauth20
+host: $(catalog.host)
 paths:
-  /authorize:
+  /oauth2/authorize:
     get:
       produces:
         - text/html
@@ -39,7 +38,9 @@ paths:
         - name: state
           in: query
           type: string
-          description: This string will be echoed back to application when user is redirected
+          description: >-
+            This string will be echoed back to application when user is
+            redirected
           required: false
       responses:
         '200':
@@ -87,7 +88,9 @@ paths:
           type: string
         - name: redirect_uri
           in: formData
-          description: URI the application is requesting this code or token to be redirected to
+          description: >-
+            URI the application is requesting this code or token to be
+            redirected to
           required: true
           type: string
         - name: original-url
@@ -108,7 +111,7 @@ paths:
       responses:
         '200':
           description: Cool
-  /token:
+  /oauth2/token:
     post:
       consumes:
         - application/x-www-form-urlencoded
@@ -123,13 +126,10 @@ paths:
 
         - Client Credentials (2-legged, there isnt resource owner information)
 
-        - Resource Owner Password Credentials (2-legged, client provides resource
-        owner name and password)
+        - Resource Owner Password Credentials (2-legged, client provides
+        resource owner name and password)
 
         - Refresh Token (exchange refresh token for a new access code)
-
-
-
 
 
         The table below indicates the required parameters for each specific
@@ -139,24 +139,12 @@ paths:
         type.
 
 
-
-
-
         Client authentication:
 
         - Confidential clients should authenticate using HTTP Basic
         Authentication. Alternatively, they may post
-
-
-
           their client_id and client_secret information as a formData parameter.
-
-
-
         - Public clients should send their client_id as formData parameter.
-
-
-
 
 
         | grant_type           | code       | client_credentials | password    |
@@ -170,26 +158,23 @@ paths:
         | client_secret        | required*  | required*          | required*   |
         required*     |
 
-        | code                 |
-        required   |                    |             |               |
+        | code                 | required   |                    |            
+        |               |
 
-        | redirect_uri         |
-        required   |                    |             |               |
+        | redirect_uri         | required   |                    |            
+        |               |
 
-        | username             |            |                    |
-        required    |               |
+        | username             |            |                    | required   
+        |               |
 
-        | password             |            |                    |
-        required    |               |
+        | password             |            |                    | required   
+        |               |
 
-        | scope                |            | optional           |
-        optional    |               |
+        | scope                |            | optional           | optional   
+        |               |
 
         | refresh_token        |            |                    |             |
         required      |
-
-
-
 
 
         The implicit grant requests, see /oauth2/authorize.
@@ -207,12 +192,16 @@ paths:
             - refresh_token
         - name: client_id
           in: formData
-          description: 'Application client ID, can be provided in formData or using HTTP Basic Authentication'
+          description: >-
+            Application client ID, can be provided in formData or using HTTP
+            Basic Authentication
           required: false
           type: string
         - name: client_secret
           in: formData
-          description: 'Application secret, must be provided in formData or using HTTP Basic Authentication'
+          description: >-
+            Application secret, must be provided in formData or using HTTP Basic
+            Authentication
           required: false
           type: string
         - name: code
@@ -222,7 +211,10 @@ paths:
           type: string
         - name: redirect_uri
           in: formData
-          description: required only if the redirect_uri parameter was included in the authorization request /oauth2/authorize; their values MUST be identical.
+          description: >-
+            required only if the redirect_uri parameter was included in the
+            authorization request /oauth2/authorize; their values MUST be
+            identical.
           required: false
           type: string
         - name: username
@@ -243,7 +235,9 @@ paths:
         - name: refresh_token
           in: formData
           type: string
-          description: The refresh token that the client wants to exchange for a new access token (refresh_token grant_type)
+          description: >-
+            The refresh token that the client wants to exchange for a new access
+            token (refresh_token grant_type)
           required: false
       responses:
         '200':
@@ -280,6 +274,9 @@ x-ibm-configuration:
       type: authenticated
     refresh-token:
       count: 2048
+      ttl: 2682000
+    access-token:
+      ttl: 3600
 schemes:
   - https
 definitions:
