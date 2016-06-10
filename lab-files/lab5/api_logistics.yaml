@@ -42,7 +42,6 @@ paths:
           schema:
             $ref: '#/definitions/shipping'
       summary: Calculate shipping costs to a destination zip code
-      operationId: shipping.calc
       parameters:
         - name: zip
           type: string
@@ -59,7 +58,6 @@ paths:
       tags:
         - stores
       summary: Locate store near zip code
-      operationId: get.stores
       parameters:
         - name: zip
           type: string

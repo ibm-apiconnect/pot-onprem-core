@@ -21,12 +21,12 @@ validate_lab4(){
 }
 
 validate_lab5(){
-  files=(definitions/inventory.yaml definitions/oauth_1.0.0.yaml definitions/financing_1.0.0.yaml definitions/logistics_1.0.0.yaml)
+  files=(definitions/inventory.yaml definitions/oauth_1.0.0.yaml definitions/financing_1.0.0.yaml api_logistics.yaml)
   run_diff
 }
 
 validate_lab6(){
-  files=(definitions/inventory.yaml definitions/oauth_1.0.0.yaml definitions/financing_1.0.0.yaml definitions/logistics_1.0.0.yaml definitions/inventory-product.yaml)
+  files=(definitions/inventory.yaml definitions/oauth_1.0.0.yaml definitions/financing_1.0.0.yaml api_logistics.yaml definitions/inventory-product.yaml)
   run_diff
 }
 

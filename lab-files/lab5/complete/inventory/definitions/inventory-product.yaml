@@ -1,20 +1,20 @@
-product: '1.0.0'
-
+product: 1.0.0
 info:
   name: inventory
   title: inventory
   version: 1.0.0
-
 apis:
-  'inventory':
+  inventory:
     $ref: inventory.yaml
-
+  oauth:
+    $ref: oauth_1.0.0.yaml
+  financing:
+    $ref: financing_1.0.0.yaml
 visibility:
   view:
     type: public
   subscribe:
     type: authenticated
-
 plans:
   default:
     title: Default Plan
