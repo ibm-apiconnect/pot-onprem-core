@@ -3,7 +3,7 @@ info:
   version: 1.0.0
   title: financing
   x-ibm-name: financing
-  description: Operations for calculating financing payments
+host: $(catalog.host)
 basePath: /financing
 paths:
   /calculate:
@@ -13,9 +13,8 @@ paths:
           description: 200 OK
           schema:
             $ref: '#/definitions/paymentAmount'
-      operationId: get.financingAmount
       parameters:
-        - name: amount
+        - name: name
           type: number
           required: true
           in: query
@@ -86,15 +85,18 @@ x-ibm-configuration:
                               namespace: 'http://services.think.ibm'
                             properties:
                               amount:
-                                id: 'http://services.think.ibm/Envelope/Body/financingRequest/amount'
+                                id: >-
+                                  http://services.think.ibm/Envelope/Body/financingRequest/amount
                                 type: number
                                 name: amount
                               duration:
-                                id: 'http://services.think.ibm/envelope/body/financingRequest/duration'
+                                id: >-
+                                  http://services.think.ibm/envelope/body/financingRequest/duration
                                 type: integer
                                 name: duration
                               rate:
-                                id: 'http://services.think.ibm/envelope/body/financingRequest/rate'
+                                id: >-
+                                  http://services.think.ibm/envelope/body/financingRequest/rate
                                 type: number
                                 name: rate
                             additionalProperties: false
@@ -129,7 +131,7 @@ x-ibm-configuration:
           verb: POST
       - gatewayscript:
           title: gatewayscript
-          source: "session.name('_apimgmt').setVar('content-type', 'application/xml');"
+          source: 'session.name(''_apimgmt'').setVar(''content-type'', ''application/xml'');'
       - xml-to-json:
           title: xml-to-json
   gateway: datapower-gateway
