@@ -159,19 +159,19 @@ paths:
         | client_secret        | required*  | required*          | required*   |
         required*     |
 
-        | code                 | required   |                    |
+        | code                 | required   |                    |            
         |               |
 
-        | redirect_uri         | required   |                    |
+        | redirect_uri         | required   |                    |            
         |               |
 
-        | username             |            |                    | required
+        | username             |            |                    | required   
         |               |
 
-        | password             |            |                    | required
+        | password             |            |                    | required   
         |               |
 
-        | scope                |            | optional           | optional
+        | scope                |            | optional           | optional   
         |               |
 
         | refresh_token        |            |                    |             |
