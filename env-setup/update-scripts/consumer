@@ -26,7 +26,7 @@ consumer() {
   npm install --silent
 
   # Register start server
-  echo Passw0rd! | sudo -S forever-service install -s bin/www pot-consumer
+  echo Passw0rd! | sudo -S forever-service install -f " -l /home/student/consumer/forever.log -o /home/student/consumer/consumer.log -e /home/student/consumer/error.log" -s bin/www pot-consumer
   echo Passw0rd! | sudo -S start pot-consumer
 
 }
