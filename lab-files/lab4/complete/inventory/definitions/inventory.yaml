@@ -164,6 +164,10 @@ paths:
           description: Request was successful
           schema:
             type: object
+            properties:
+              count:
+                type: number
+                format: double
       deprecated: false
   /items:
     post:
@@ -187,7 +191,9 @@ paths:
     put:
       tags:
         - item
-      summary: Update an existing model instance or insert a new one into the data source.
+      summary: >-
+        Update an existing model instance or insert a new one into the data
+        source.
       operationId: item.upsert
       parameters:
         - name: data
@@ -240,6 +246,9 @@ paths:
           description: Request was successful
           schema:
             type: object
+            properties:
+              exists:
+                type: boolean
       deprecated: false
   '/items/{id}':
     head:
@@ -259,6 +268,9 @@ paths:
           description: Request was successful
           schema:
             type: object
+            properties:
+              exists:
+                type: boolean
       deprecated: false
     get:
       tags:
@@ -305,7 +317,9 @@ paths:
     put:
       tags:
         - item
-      summary: Update attributes for a model instance and persist it into the data source.
+      summary: >-
+        Update attributes for a model instance and persist it into the data
+        source.
       operationId: item.prototype.updateAttributes
       parameters:
         - name: data
@@ -389,6 +403,10 @@ paths:
           description: Request was successful
           schema:
             type: object
+            properties:
+              count:
+                type: number
+                format: double
       deprecated: false
   /items/change-stream:
     post:
@@ -406,7 +424,7 @@ paths:
         '200':
           description: Request was successful
           schema:
-            type: object
+            type: file
       deprecated: false
     get:
       tags:
@@ -423,7 +441,7 @@ paths:
         '200':
           description: Request was successful
           schema:
-            type: object
+            type: file
       deprecated: false
 definitions:
   review:
@@ -483,7 +501,7 @@ definitions:
     additionalProperties: false
   ObjectID:
     type: string
-    pattern: "^[a-fA-F\\d]{24}$"
+    pattern: '^[a-fA-F\d]{24}$'
 swagger: '2.0'
 info:
   x-ibm-name: inventory
@@ -491,6 +509,7 @@ info:
   title: inventory
 schemes:
   - https
+host: $(catalog.host)
 basePath: /inventory
 consumes:
   - application/json
@@ -522,7 +541,6 @@ x-ibm-configuration:
   enforced: true
   cors:
     enabled: true
-  gateway: datapower-gateway
   catalogs:
     apic-dev:
       properties:
@@ -533,7 +551,7 @@ x-ibm-configuration:
     Sandbox:
       properties:
         app-server: 'http://appsvr.think.ibm'
-        app-id: inventory-575b0515e4b0ed41765c7fdb-1465583261860.sales
+        app-id: inventory-lkjsadlfjoo2i309asjdofjad
   assembly:
     execute:
       - activity-log:
@@ -556,3 +574,4 @@ x-ibm-configuration:
       value: 'http://localhost/'
       description: Catalog-specific app server URL
       encoded: false
+  gateway: datapower-gateway
