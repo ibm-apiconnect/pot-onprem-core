@@ -14,7 +14,7 @@ paths:
           schema:
             $ref: '#/definitions/paymentAmount'
       parameters:
-        - name: name
+        - name: amount
           type: number
           required: true
           in: query

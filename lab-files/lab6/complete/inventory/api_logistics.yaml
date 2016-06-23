@@ -158,7 +158,7 @@ x-ibm-configuration:
                   path: /stores
               execute:
                 - invoke:
-                    title: invoke_google_geocode
+                    title: invoke_google_geolocate
                     timeout: 60
                     verb: GET
                     cache-response: protocol
@@ -167,7 +167,7 @@ x-ibm-configuration:
                       https://maps.googleapis.com/maps/api/geocode/json?&address={zip}
                     output: google_geocode_response
                 - gatewayscript:
-                    title: gatewayscript
+                    title: gws-format-maps-link
                     source: >-
                       // Require API Connect Functions
 
