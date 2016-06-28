@@ -4,5 +4,6 @@
   "img": "images/items/hollerith-tabulator.jpg",
   "img_alt": "Hollerith Tabulator",
   "price": 10599.99,
-  "rating": 0
+  "rating": 0,
+  "loopback__model__name": "item"
 }

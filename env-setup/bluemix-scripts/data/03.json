@@ -4,5 +4,6 @@
   "img": "images/items/collator.jpg",
   "img_alt": "Collator",
   "price": 2799.99,
-  "rating": 0
+  "rating": 0,
+  "loopback__model__name": "item"
 }

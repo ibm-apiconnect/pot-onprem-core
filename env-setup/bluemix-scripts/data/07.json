@@ -4,5 +4,6 @@
   "img": "images/items/608-calculator.jpg",
   "img_alt": "608 Calculator",
   "price": 5199.99,
-  "rating": 0
+  "rating": 0,
+  "loopback__model__name": "item"
 }

@@ -4,5 +4,6 @@
   "img": "images/items/tape-controlled-punch.jpg",
   "img_alt": "Tape Controlled Card Punch",
   "price": 1299.99,
-  "rating": 0
+  "rating": 0,
+  "loopback__model__name": "item"
 }

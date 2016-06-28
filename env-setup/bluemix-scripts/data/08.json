@@ -4,5 +4,6 @@
   "img": "images/items/electric-card-punch.jpg",
   "img_alt": "IBM 77 Electric Punched Card Collator",
   "price": 3899.99,
-  "rating": 0
+  "rating": 0,
+  "loopback__model__name": "item"
 }

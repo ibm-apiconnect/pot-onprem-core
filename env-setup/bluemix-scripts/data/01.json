@@ -4,5 +4,6 @@
   "img": "images/items/selectric.jpg",
   "img_alt": "Selectric Typewriter",
   "price": 2199.99,
-  "rating": 0
+  "rating": 0,
+  "loopback__model__name": "item"
 }

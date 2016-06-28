@@ -4,5 +4,6 @@
   "img": "images/items/meat-chopper.jpg",
   "img_alt": "Dayton Meat Chopper",
   "price": 4599.99,
-  "rating": 0
+  "rating": 0,
+  "loopback__model__name": "item"
 }

@@ -4,5 +4,6 @@
   "img": "images/items/803-proof.jpg",
   "img_alt": "803 Proof Machine",
   "price": 399.99,
-  "rating": 0
+  "rating": 0,
+  "loopback__model__name": "item"
 }

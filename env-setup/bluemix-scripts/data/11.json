@@ -4,5 +4,6 @@
   "img": "images/items/summary-punch.jpg",
   "img_alt": "Summary Punch",
   "price": 1899.99,
-  "rating": 0
+  "rating": 0,
+  "loopback__model__name": "item"
 }

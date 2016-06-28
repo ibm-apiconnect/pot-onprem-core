@@ -4,5 +4,6 @@
   "img": "images/items/computing-scale.jpg",
   "img_alt": "Computing Scale",
   "price": 699.99,
-  "rating": 0
+  "rating": 0,
+  "loopback__model__name": "item"
 }
