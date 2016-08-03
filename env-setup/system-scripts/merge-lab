@@ -51,7 +51,10 @@ run_merge(){
     fi
     printf "\n\n"
   done
-  refresh_swagger
+  if [ $lab_num -lt 6 ]
+    then
+      refresh_swagger
+  fi
 }
 
 refresh_swagger(){
