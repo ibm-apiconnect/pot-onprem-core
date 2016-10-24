@@ -5,9 +5,9 @@
 # Include node install build tools: sudo apt-get install -y build-essential
 
 # Set Variables
-# Target version for 5010 controller:  1.3.1
-# Target version for 5010 member:  1.1.1
-collective_controller_fn="apiconnect-collective-controller-linux-x86_64-1.3.1.tgz"
+# Target version for 5010 controller:  2.3.0
+# Target version for 5010 member:  1.3.5
+collective_controller_fn="apiconnect-collective-controller-linux-x86_64-2.3.0.tgz"
 ihs_fn="ihs.tgz"
 plugin_fn="plugin.tgz"
 download_dir="/home/student/Downloads/apic-collective-packages"

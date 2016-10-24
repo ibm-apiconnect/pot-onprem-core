@@ -2,4 +2,4 @@
 
 # Target version for 5010:  2.0.18
 
-echo Passw0rd! | sudo -S npm install -g --unsafe-perm apiconnect@2.0.18
+echo Passw0rd! | sudo -S npm install -g --unsafe-perm apiconnect@2.3.10
