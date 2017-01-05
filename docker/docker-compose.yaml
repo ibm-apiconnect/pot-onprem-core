@@ -53,8 +53,6 @@ services:
       - SMTP_SENDER
       - LOGSTASH_HOST=ibmlogstash
       - ACCEPT_LICENSE
-    links:
-      - "dp.think.ibm:api.think.ibm"
     networks:
       - ibmnet
     depends_on:
@@ -124,8 +122,6 @@ services:
       - STUBSVCS_DNS=services.think.ibm
     ports:
       - "443:443"
-    links:
-      - "dp.think.ibm:api.think.ibm"
     volumes:
       - /var/log/nginx:/var/log/nginx
     depends_on:
