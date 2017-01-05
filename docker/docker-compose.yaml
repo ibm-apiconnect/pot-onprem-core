@@ -25,9 +25,7 @@ services:
 
   datapower:
     build: datapower
-    container_name: dp.think.ibm
-    ports:
-      - "9090:9090"
+    container_name: api.think.ibm
     networks:
       - ibmnet
     environment:
@@ -77,8 +75,6 @@ services:
       - SMTP_PASSWORD
       - SMTP_SENDER
       - ACCEPT_LICENSE
-    links:
-      - "dp.think.ibm:api.think.ibm"
     volumes:
       - ibmportal_var:/var
       - ibmportal_etc:/etc
@@ -86,6 +82,7 @@ services:
     depends_on:
       - make-ssh-keys
       - apim
+      - datapower
     networks:
       - ibmnet
 
@@ -122,6 +119,7 @@ services:
       - PORTAL_DNS=developer.think.ibm
       - APIM_DNS=mgr.think.ibm
       - GATEWAY_DNS=api.think.ibm
+      - DATAPOWER_DNS=dp.think.ibm
       - CONSUMER_DNS=consumer.think.ibm
       - STUBSVCS_DNS=services.think.ibm
     ports:

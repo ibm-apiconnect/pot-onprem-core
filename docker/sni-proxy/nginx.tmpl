@@ -8,12 +8,13 @@ events {
 
 stream {
     map $ssl_preread_server_name $name {
-        PORTAL   portal_backend;
-        APIM     apim_backend;
-        GATEWAY  gateway_backend;
-        CONSUMER consumer_backend;
-        STUBSVCS stubsvcs_backend;
-        default  gateway_backend;
+        PORTAL    portal_backend;
+        APIM      apim_backend;
+        GATEWAY   gateway_backend;
+        DATAPOWER datapower_backend;
+        CONSUMER  consumer_backend;
+        STUBSVCS  stubsvcs_backend;
+        default   gateway_backend;
     }
 
     upstream apim_backend {
@@ -26,6 +27,10 @@ stream {
 
     upstream gateway_backend {
         server GATEWAY:443;
+    }
+
+    upstream datapower_backend {
+        server DATAPOWER:443;
     }
 
     upstream consumer_backend {
