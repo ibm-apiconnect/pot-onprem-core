@@ -1,0 +1,29 @@
+<div class="container">
+
+    <form class="form-basic" name="loginForm" novalidate ng-submit="login(user)">
+
+        <div class="form-title-row">
+            <h1>Log In with OAuth 2.0</h1>
+        </div>
+
+        <div class="form-row">
+            <label>
+                <span>Username</span>
+                <input type="text" placeholder="Username" autocomplete="off" ng-model="user.un">
+            </label>
+        </div>
+
+        <div class="form-row">
+            <label>
+                <span>Password</span>
+                <input type="text" placeholder="Password" autocomplete="off" ng-model="user.pwd">
+            </label>
+        </div>
+
+        <div class="form-row">
+            <button type="submit">Log In</button>
+        </div>
+
+    </form>
+
+</div>

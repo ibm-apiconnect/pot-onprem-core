@@ -1,0 +1,13 @@
+applications:
+- services:
+  - Monitoring and Analytics
+  disk_quota: 1024M
+  host: thinkibm-services
+  name: ThinkIBM Services
+  path: .
+  domain: mybluemix.net
+  instances: 8
+  memory: 512M
+env:
+  NODE_ENV: bluemix
+  DEBUG: services:*

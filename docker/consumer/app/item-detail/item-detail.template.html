@@ -1,0 +1,202 @@
+<span us-spinner="{radius:30, width:8, length: 16}" spinner-key="detailSpinner" spinner-start-active="true"></span>
+
+<div class="container" ng-hide="hideContainer">
+
+    <!-- Top Section -->
+    <div class="section group">
+
+        <!-- Item Image -->
+        <div class="col span_1_of_5">
+            <img class="item-tn" ng-src="{{item.img}}" />
+        </div>
+
+        <!-- Item Name / Price / Rating -->
+        <div class="col span_3_of_5">
+
+            <div class="detail-section-title">
+                {{item.name}}
+            </div>
+
+            <div class="detail-rating detail-section-other">
+                <i class="fa fa-star detail-star-style" ng-repeat="n in stars(item.rating, 'full')"></i>
+                <i class="fa fa-star-half-o detail-star-style" ng-repeat="n in stars(item.rating, 'half')"></i>
+                <i class="fa fa-star-o detail-star-style" ng-repeat="n in stars(item.rating, 'empty')"></i>
+            </div>
+
+            <div class="detail-section-other">
+                ${{item.price}}
+            </div>
+
+            <div class="detail-section-other" ng-switch on="financingResult">
+                <a href ng-switch-when="undefined" ng-click="finCalc();">Calculate Financing</a>
+                <div ng-switch-when="calculating">calculating...</div>
+                <div class="detail-financing-result" ng-switch-default>Monthly Payment:<br/>${{financingResult}} at 3.9% for 24 months</div>
+            </div>
+
+        </div>
+
+        <!-- Calculate Item Shipping -->
+        <div class="col span_1_of_5 detail-shipping-block">
+
+            <div class="detail-section-title">
+                Calculate Shipping
+            </div>
+
+            <div ng-switch on="shippingResult">
+
+                <div ng-switch-when="undefined">
+                    <form class="form-search" novalidate>
+                        <input type="search" class="ship-calc-input" placeholder="Zip Code" ng-maxlength="5" ng-model="shippingInput.zip" />
+                        <button type="submit" ng-click="shipCalc(shippingInput); storeLoc(shippingInput);">Calculate</button>
+                        <i class="fa fa-search"></i>
+                    </form>
+                </div>
+
+                <div ng-switch-when="calculating">calculating...</div>
+
+                <div ng-switch-default>
+                    <div class="section group">
+                        <div class="col span_1_of_3">
+                            XYZ
+                        </div>
+                        <div class="col span_2_of_3">
+                            <div class="col span_1_of_2">Next Day</div><div class="col span_1_of_2">{{shippingResult.xyz.next_day}}</div>
+                            <div class="col span_1_of_2">Two Day</div><div class="col span_1_of_2">{{shippingResult.xyz.two_day}}</div>
+                            <div class="col span_1_of_2">Ground</div><div class="col span_1_of_2">{{shippingResult.xyz.ground}}</div>
+                        </div>
+                    </div>
+                    <div class="section group">
+                        <div class="col span_3_of_3">
+                            <hr/>
+                        </div>
+                    </div>
+                    <div class="section group">
+                        <div class="col span_3_of_3">
+                            <div class="col span_1_of_3">
+                                CEK
+                            </div>
+                            <div class="col span_2_of_3">
+                                <div class="col span_1_of_2">Next Day</div><div class="col span_1_of_2">{{shippingResult.cek.next_day}}</div>
+                                <div class="col span_1_of_2">Two Day</div><div class="col span_1_of_2">{{shippingResult.cek.two_day}}</div>
+                                <div class="col span_1_of_2">Ground</div><div class="col span_1_of_2">{{shippingResult.cek.ground}}</div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="section group">
+                        <div class="col span_3_of_3">
+                            <hr/>
+                        </div>
+                    </div>
+                    <div class="section group">
+                        <div class="col span_3_of_3">
+                            <a href="{{nearbyStore.google_maps_link}}" target="_blank">Pick up in nearest store</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+
+    </div>
+
+    <div>
+        <hr>
+    </div>
+
+    <!-- Middle Section -->
+    <div class="section group">
+
+        <p class="detail-section-title">
+            Product Description
+        </p>
+        <div class="detail-description-box">
+            {{item.description}}
+        </div>
+    </div>
+
+    <div>
+        <hr>
+    </div>
+
+    <!-- Bottom Section -->
+    <div class="section group">
+        <div class="col span_2_of_3 detail-review-section">
+
+            <p class="detail-section-title">
+                Customer Reviews ({{reviews.length}})
+            </p>
+
+            <div class="detail-review-box" ng-repeat="review in reviews">
+
+                <div class="detail-review-header">
+                    <i class="fa fa-star detail-star-style" ng-repeat="n in stars(review.rating, 'full')"></i>
+                    <i class="fa fa-star-half-o detail-star-style" ng-repeat="n in stars(review.rating, 'half')"></i>
+                    <i class="fa fa-star-o detail-star-style" ng-repeat="n in stars(review.rating, 'empty')"></i>
+                    &nbsp;by {{review.reviewer_name}} on {{review.date}}
+                </div>
+
+                <div class="detail-review-comment">
+                    "{{review.comment}}"
+                </div>
+            </div>
+
+        </div>
+
+        <div class="col span_1_of_3">
+
+            <p class="detail-section-title">
+                Write a Review
+            </p>
+
+            <div class="detail-leave-review-box">
+
+                <form novalidate class="form-basic form-basic-comment">
+
+                    <div class="form-row">
+                        <label>
+                            <span>Rating</span>
+                            <select id="reviewRating" ng-model="newReview.rating">
+                                <option ng-selected="selected">5</option>
+                                <option>4</option>
+                                <option>3</option>
+                                <option>2</option>
+                                <option>1</option>
+                            </select>
+                        </label>
+                    </div>
+
+                    <div class="form-row">
+                        <label>
+                            <span>Name</span>
+                            <input type="text" ng-model="newReview.reviewer_name" />
+                        </label>
+                    </div>
+
+
+                    <div class="form-row">
+                        <label>
+                            <span>Email</span>
+                            <input type="text" ng-model="newReview.reviewer_email" />
+                        </label>
+                    </div>
+
+                    <div class="form-row">
+                        <label>
+                            <span>Comment</span>
+                            <input type="text" ng-model="newReview.comment" />
+                        </label>
+                    </div>
+
+                    <div class="form-row">
+                        <button type="submit" ng-click="submitNewReview(newReview);">Submit</button>
+                    </div>
+
+                </form>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</div>

@@ -17,7 +17,7 @@ services:
 
   fakesmtp:
     image: munkyboy/fakesmtp
-    container_name: fakesmtp
+    container_name: fakesmtp.think.ibm
     volumes:
       - /tmp/fakemail/:/var/mail
     networks:
@@ -25,7 +25,7 @@ services:
 
   datapower:
     build: datapower
-    container_name: datapower
+    container_name: dp.think.ibm
     ports:
       - "9090:9090"
     networks:
@@ -35,16 +35,17 @@ services:
 
   apim:
     image: ibmcom/apiconnect:manager-${APIC_VERSION}
+    container_name: mgr.think.ibm
     mem_limit: 2048m
     volumes:
       - apim_ihvar:/ihvar
       - apim_wip:/wip
       - config_ssh_keys:/keys:ro
     environment:
-      - MANAGEMENT_CLUSTER_HOST=apim
+      - MANAGEMENT_CLUSTER_HOST=mgr.think.ibm
       - PORTAL_PRIVATE_KEY=/keys/portal
       - PORTAL_PUBLIC_KEY=/keys/portal.pub
-      - PORTAL_LB=ibmportal
+      - PORTAL_LB=developer.think.ibm
       - ES_HOST=esmaster
       - ES_PORT=9500
       - SMTP_HOST
@@ -54,7 +55,8 @@ services:
       - SMTP_SENDER
       - LOGSTASH_HOST=ibmlogstash
       - ACCEPT_LICENSE
-    container_name: apim
+    links:
+      - "dp.think.ibm:api.think.ibm"
     networks:
       - ibmnet
     depends_on:
@@ -64,56 +66,70 @@ services:
 
   ibmportal:
     image: ibmcom/apiconnect:portal-${APIC_VERSION}
+    container_name: developer.think.ibm
     environment:
-      - PORTAL_LB=ibmportal
+      - PORTAL_LB=developer.think.ibm
       - PORTAL_PUBLIC_KEY=/keys/portal.pub
-      - APIC_HOST=apim
+      - APIC_HOST=mgr.think.ibm
       - SMTP_HOST
       - SMTP_PORT
       - SMTP_USERNAME
       - SMTP_PASSWORD
       - SMTP_SENDER
       - ACCEPT_LICENSE
+    links:
+      - "dp.think.ibm:api.think.ibm"
     volumes:
       - ibmportal_var:/var
       - ibmportal_etc:/etc
       - config_ssh_keys:/keys:ro
-    container_name: ibmportal
     depends_on:
       - make-ssh-keys
       - apim
     networks:
       - ibmnet
 
-#  microservice:
-#    build: microservice
-#    container_name: microservice
-#    networks:
-#      - ibmnet
+  consumer:
+    build: consumer
+    container_name: consumer.think.ibm
+    networks:
+      - ibmnet
+
+  stubsvcs:
+    build: stub-services
+    container_name: services.think.ibm
+    networks:
+      - ibmnet
 
   logstash:
     image: ibmcom/apiconnect:logstash-${APIC_VERSION}
+    container_name: ibmlogstash
     environment:
       - ES_HOST=esmaster
-      - MGMT_HOST=apim
-      - DB_HOST=apim
+      - MGMT_HOST=mgr.think.ibm
+      - DB_HOST=mgr.think.ibm
       - ACCEPT_LICENSE
     networks:
       - ibmnet
-    container_name: ibmlogstash
     depends_on:
       - apim
       - esmaster
 
   nginx:
     build: sni-proxy
+    container_name: nginx
     environment:
-      - PORTAL_DNS=ibmportal
-      - APIM_DNS=apim
-      - GATEWAY_DNS=datapower
+      - PORTAL_DNS=developer.think.ibm
+      - APIM_DNS=mgr.think.ibm
+      - GATEWAY_DNS=api.think.ibm
+      - CONSUMER_DNS=consumer.think.ibm
+      - STUBSVCS_DNS=services.think.ibm
     ports:
       - "443:443"
-    container_name: nginx
+    links:
+      - "dp.think.ibm:api.think.ibm"
+    volumes:
+      - /var/log/nginx:/var/log/nginx
     depends_on:
       - ibmportal
       - datapower

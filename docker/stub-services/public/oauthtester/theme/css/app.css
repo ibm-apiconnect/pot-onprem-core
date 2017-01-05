@@ -1,0 +1,122 @@
+/* app css stylesheet */
+
+body {
+  line-height: 1.7em;
+  color: #7f8c8d;
+}
+
+.main {
+  margin-bottom: 100px;
+}
+
+.container {
+  max-width: 1500px !important;
+}
+
+.footer {
+  line-height: 1.5em;
+}
+
+.item-tn {
+  max-width: 100%;
+  height: auto;
+}
+
+.item-box {
+  cursor: pointer;
+  border: 1px solid #777;
+}
+
+.item-box-name,
+.item-box-price,
+.item-box-rating
+{
+  color: #777;
+  padding: 1em;
+}
+
+.star-style {
+  color: #1D8FEB;
+  float: right;
+  padding-left: 1px;
+}
+
+.detail-shipping-block {
+  float: right;
+}
+
+.detail-section-title {
+  color: #000000;
+  font-weight: bold;
+  font-size: 20px;
+  margin-bottom: 20px;
+}
+
+.detail-section-other {
+  margin-bottom: 20px;
+}
+
+.detail-rating {
+  display: inline-block;
+}
+
+.detail-star-style {
+  color: #1D8FEB;
+  float: left;
+}
+
+.detail-description-box {
+  margin: 0 0 20px 20px;
+  line-height: 1.7em;
+}
+
+.detail-review-section {
+  padding-right: 4em;
+}
+
+.detail-review-box,
+.detail-leave-review-box {
+  margin-top: 1em;
+  margin-bottom: 1em;
+  padding: 1em;
+  border: 1px solid #777;
+}
+
+.detail-review-header {
+  margin-bottom: 15px;
+}
+
+.detail-review-comment {
+  font-style: italic;
+}
+
+.detail-financing-result {
+  line-height: 1.5em;
+}
+
+.form-search {
+  float: left;
+}
+
+.form-search input {
+  width: 160px;
+}
+
+.form-basic-comment {
+  padding: 0;
+  box-shadow: none;
+}
+
+.form-basic-comment .form-row > label span {
+  width: 110px;
+}
+
+.splash-head {
+  font-size: 300%;
+  color: #1D8FEB;
+  border: 3px solid #1D8FEB;
+  padding: 1em 1.6em;
+  font-weight: 100;
+  border-radius: 5px;
+  line-height: 1em;
+}

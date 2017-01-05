@@ -1,0 +1,23 @@
+<span us-spinner="{radius:30, width:8, length: 16}" spinner-key="itemsSpinner" spinner-start-active="true"></span>
+<div class="container">
+    <div class="section group">
+        <div class="col span_1_of_4 item-box" ng-repeat="item in items" ng-click="goToItem(item.id)">
+            <div>
+                <img class="item-tn" ng-src="{{item.img}}" />
+            </div>
+            <div class="item-box-name">
+                {{item.name}}
+            </div>
+            <div>
+                <div class="col span_1_of_2 item-box-price">
+                    ${{item.price}}
+                </div>
+                <div class="col span_1_of_2 item-box-rating">
+                    <i class="fa fa-star-o star-style" ng-repeat="n in stars(item.rating, 'empty')"></i>
+                    <i class="fa fa-star-half-o star-style" ng-repeat="n in stars(item.rating, 'half')"></i>
+                    <i class="fa fa-star star-style" ng-repeat="n in stars(item.rating, 'full')"></i>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

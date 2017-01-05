@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<!--[if lt IE 7]>      <html lang="en" ng-app="myApp" class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
+<!--[if IE 7]>         <html lang="en" ng-app="myApp" class="no-js lt-ie9 lt-ie8"> <![endif]-->
+<!--[if IE 8]>         <html lang="en" ng-app="myApp" class="no-js lt-ie9"> <![endif]-->
+<!--[if gt IE 8]><!--> <html lang="en" ng-app="myApp" class="no-js"> <!--<![endif]-->
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title><%= title %></title>
+    <meta name="description" content="">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <!-- Theme Components -->
+    <link rel="stylesheet" href="theme/css/bootstrap.min.css" media="screen">
+    <link rel="stylesheet" href="theme/css/reset.css" media="screen">
+    <link rel="stylesheet" href="theme/css/rgs/html5reset.css" media="all">
+    <link rel="stylesheet" href="theme/css/rgs/col.css" media="all">
+    <link rel="stylesheet" href="theme/font-awesome/font-awesome.css" media="all">
+    <link rel="stylesheet" href="theme/css/form-basic.css">
+    <link rel="stylesheet" href="theme/css/form-search.css">
+    <link rel="stylesheet" href="theme/css/app.css">
+    <script src="theme/js/jquery.min.js"></script>
+    <script src="theme/js/bootstrap.min.js"></script>
+    <script src="theme/js/respond.min.js"></script>
+    <script src="theme/js/holder.js"></script>
+
+    <!-- Angular Components -->
+    <script src="bower_components/angular/angular.js"></script>
+    <script src="bower_components/angular-elastic/elastic.js"></script>
+    <script src="bower_components/angular-resource/angular-resource.js"></script>
+    <script src="bower_components/angular-route/angular-route.js"></script>
+    <script src="bower_components/angular-local-storage/dist/angular-local-storage.min.js"></script>
+    <script src="bower_components/angular-base64/angular-base64.js"></script>
+    <script src="bower_components/spin.js/spin.min.js"></script>
+    <script src="bower_components/angular-spinner/angular-spinner.min.js"></script>
+    <script src="services/think.module.js"></script>
+    <script src="services/think.services.js"></script>
+    <script src="app.module.js"></script>
+    <script src="app.config.js"></script>
+    <script src="home-page/home-page.module.js"></script>
+    <script src="home-page/home-page.component.js"></script>
+    <script src="app-config/app-config.module.js"></script>
+    <script src="app-config/app-config.component.js"></script>
+    <script src="app-logout/app-logout.module.js"></script>
+    <script src="app-logout/app-logout.component.js"></script>
+</head>
+<body>
+
+<!-- Nav Bar -->
+<div class="navbar navbar-fixed-top">
+    <div class="container">
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse"> <span class="icon-bar"></span> <span class="icon-bar"></span> <span class="icon-bar"></span> </button>
+            <a class="navbar-brand" href="#"><%= title %></a>
+        </div>
+        <div class="navbar-collapse collapse">
+            <ul class="nav navbar-nav navbar-right">
+                <li><a href="#!/logout">Reset Config</a></li>
+            </ul>
+        </div>
+    </div>
+</div>
+
+<div class="main">
+
+    <!-- Angular Views -->
+    <div class="view-container">
+        <div ng-view class="view-frame"></div>
+    </div>
+
+</div>
+
+<!-- Footer -->
+<footer>
+    <div class="footer navbar-fixed-bottom">
+        <div class="container">
+            <div class="col-lg-12">
+                <p class="copyright">Made by <a href="https://developer.ibm.com/apiconnect/" target="_blank">IBM</a> using <a href="http://getbootstrap.com/" target="_blank">Bootstrap</a>.
+                    Licensed under the <a href="http://www.apache.org/licenses/LICENSE-2.0" target="_blank">Apache 2.0 License</a>.</p>
+                <p><a href="https://github.com/ibm-apiconnect/pot-consumer" target="_blank">ThinkIBM Consumer PoT Test Application</a></p>
+            </div>
+        </div>
+    </div>
+</footer>
+
+</body>
+</html>

@@ -1,0 +1,192 @@
+/* app css stylesheet */
+
+body {
+  line-height: 1.7em;
+  color: #7f8c8d;
+}
+
+.main {
+  margin-bottom: 100px;
+}
+
+.container {
+  max-width: 1500px !important;
+}
+
+.footer {
+  line-height: 1.5em;
+}
+
+.item-tn {
+  max-width: 100%;
+  height: auto;
+}
+
+.item-box {
+  cursor: pointer;
+  border: 1px solid #777;
+}
+
+.item-box-name,
+.item-box-price,
+.item-box-rating
+{
+  color: #777;
+  padding: 1em;
+}
+
+.star-style {
+  color: #1D8FEB;
+  float: right;
+  padding-left: 1px;
+}
+
+.detail-shipping-block {
+  float: right;
+}
+
+.detail-section-title {
+  color: #000000;
+  font-weight: bold;
+  font-size: 20px;
+  margin-bottom: 20px;
+}
+
+.detail-section-other {
+  margin-bottom: 20px;
+}
+
+.detail-rating {
+  display: inline-block;
+}
+
+.detail-star-style {
+  color: #1D8FEB;
+  float: left;
+}
+
+.detail-description-box {
+  margin: 0 0 20px 20px;
+  line-height: 1.7em;
+}
+
+.detail-review-section {
+  padding-right: 4em;
+}
+
+.detail-review-box,
+.detail-leave-review-box {
+  margin-top: 1em;
+  margin-bottom: 1em;
+  padding: 1em;
+  border: 1px solid #777;
+}
+
+.detail-review-header {
+  margin-bottom: 15px;
+}
+
+.detail-review-comment {
+  font-style: italic;
+}
+
+.detail-financing-result {
+  line-height: 1.5em;
+}
+
+.form-search {
+  float: left;
+}
+
+.form-search input {
+  width: 160px;
+}
+
+.form-basic-comment {
+  padding: 0;
+  box-shadow: none;
+}
+
+.form-basic-comment .form-row > label span {
+  width: 110px;
+}
+
+.splash-container {
+  z-index: 1;
+  overflow: hidden;
+  width: 100%;
+  height: 88%;
+  top: 0;
+  left: 0;
+  position: fixed !important;
+}
+
+.splash {
+  width: 50%;
+  height: 50%;
+  margin: auto;
+  position: absolute;
+  top: 100px;
+  left: 0;
+  bottom: 0;
+  right: 0;
+  text-align: center;
+  text-transform: uppercase;
+}
+
+.splash-head {
+  font-size: 300%;
+  color: #1D8FEB;
+  border: 3px solid #1D8FEB;
+  padding: 1em 1.6em;
+  font-weight: 100;
+  border-radius: 5px;
+  line-height: 1em;
+  margin: .67em 0;
+}
+
+.splash-subhead {
+  color: #1D8FEB;
+  letter-spacing: 0.05em;
+  opacity: 0.8;
+  margin: .67em 0;
+}
+
+.pure-button-primary, .pure-button-selected, a.pure-button-primary, a.pure-button-selected {
+  background-color: #0078e7;
+  color: #fff;
+  border-radius: 5px;
+  font-size: 120%;
+  margin: .67em 0;
+}
+
+.pure-button {
+  font-family: inherit;
+  font-size: 100%;
+  padding: .5em 1em;
+  color: #444;
+  color: rgba(0, 0, 0, .8);
+  border: 1px solid #999;
+  border: 0 rgba(0, 0, 0, 0);
+  background-color: #E6E6E6;
+  text-decoration: none;
+  border-radius: 2px;
+}
+
+.pure-button {
+  display: inline-block;
+  zoom: 1;
+  line-height: normal;
+  white-space: nowrap;
+  vertical-align: middle;
+  text-align: center;
+  cursor: pointer;
+  -webkit-user-drag: none;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  box-sizing: border-box;
+}

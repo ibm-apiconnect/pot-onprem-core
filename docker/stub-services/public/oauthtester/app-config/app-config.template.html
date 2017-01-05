@@ -1,0 +1,57 @@
+<div class="container">
+
+    <form class="form-basic" name="configForm" novalidate ng-submit="setConfig(config)">
+
+        <div class="form-title-row">
+            <h1>Resource Owner Grant Type Config</h1>
+        </div>
+
+        <div class="form-row">
+            <label>
+                <span>Token URL</span>
+                <input type="text" autocomplete="off" ng-model="config.tokenUrl">
+            </label>
+        </div>
+
+        <div class="form-row">
+            <label>
+                <span>Resource Owner ID</span>
+                <input type="text" autocomplete="off" ng-model="config.roId">
+            </label>
+        </div>
+
+        <div class="form-row">
+            <label>
+                <span>Resource Owner Password</span>
+                <input type="text" autocomplete="off" ng-model="config.roPwd">
+            </label>
+        </div>
+
+        <div class="form-row">
+            <label>
+                <span>Client ID</span>
+                <input type="text" autocomplete="off" ng-model="config.clientId">
+            </label>
+        </div>
+
+        <div class="form-row">
+            <label>
+                <span>Client Secret</span>
+                <input type="text" autocomplete="off" ng-model="config.clientSecret">
+            </label>
+        </div>
+
+        <div class="form-row">
+            <label>
+                <span>Scope</span>
+                <input type="text" autocomplete="off" ng-model="config.scope">
+            </label>
+        </div>
+
+        <div class="form-row">
+            <button type="submit">Submit</button>
+        </div>
+
+    </form>
+
+</div>

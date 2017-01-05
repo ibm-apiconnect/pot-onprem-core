@@ -1,0 +1,57 @@
+<wsdl:definitions name="financing" 
+   targetNamespace="http://thinkibm-services.mybluemix.net"
+   xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/"
+   xmlns:ser="http://thinkibm-services.mybluemix.net"
+   xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/"
+   xmlns:xs="http://www.w3.org/2001/XMLSchema"
+   xmlns="http://schemas.xmlsoap.org/wsdl/">
+   <wsdl:types>
+      <xs:schema targetNamespace="http://thinkibm-services.mybluemix.net" elementFormDefault="qualified">
+         <xs:element name="financingRequest">
+            <xs:complexType>
+               <xs:sequence>
+                  <xs:element name="amount" type="xs:decimal"/>
+                  <xs:element name="duration" type="xs:integer"/>
+                  <xs:element name="rate" type="xs:decimal"/>
+               </xs:sequence>
+            </xs:complexType>
+         </xs:element>
+         <xs:element name="financingResult">
+            <xs:complexType>
+               <xs:sequence>
+                  <xs:element name="paymentAmount" type="xs:decimal"/>
+               </xs:sequence>
+            </xs:complexType>
+         </xs:element>
+      </xs:schema>
+   </wsdl:types>
+   <wsdl:message name="financingInput">
+      <wsdl:part name="body" element="ser:financingRequest"/>
+   </wsdl:message>
+   <wsdl:message name="financingOutput">
+      <wsdl:part name="body" element="ser:financingResult"/>
+   </wsdl:message>
+   <wsdl:portType name="financingPortType">
+      <wsdl:operation name="financing">
+         <wsdl:input message="ser:financingInput"/>
+         <wsdl:output message="ser:financingOutput"/>
+      </wsdl:operation>
+   </wsdl:portType>
+   <wsdl:binding name="financingBinding" type="ser:financingPortType">
+      <soap:binding style="document" transport="http://schemas.xmlsoap.org/soap/http"/>
+      <wsdl:operation name="financing">
+         <soap:operation soapAction="http://thinkibm-services.mybluemix.net/financing"/>
+         <wsdl:input>
+            <soap:body use="literal"/>
+         </wsdl:input>
+         <wsdl:output>
+            <soap:body use="literal"/>
+         </wsdl:output>
+      </wsdl:operation>
+   </wsdl:binding>
+   <wsdl:service name="financingService">
+      <wsdl:port name="financingPort" binding="ser:financingBinding">
+         <soap:address location="https://thinkibm-services.mybluemix.net/financing/calculate"/>
+      </wsdl:port>
+   </wsdl:service>
+</wsdl:definitions>
