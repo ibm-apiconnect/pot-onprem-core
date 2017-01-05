@@ -16,23 +16,22 @@ services:
       - es_data:/usr/share/elasticsearch/data
 
   fakesmtp:
-    build: fakesmtp
+    image: munkyboy/fakesmtp
     container_name: fakesmtp
     volumes:
       - /tmp/fakemail/:/var/mail
-    ports:
-      - "25:25"
     networks:
       - ibmnet
 
   datapower:
     build: datapower
     container_name: datapower
+    ports:
+      - "9090:9090"
     networks:
       - ibmnet
     environment:
       - DATAPOWER_ACCEPT_LICENSE=$ACCEPT_LICENSE
-      - DP_WEB_MGMT=true
 
   apim:
     image: ibmcom/apiconnect:manager-${APIC_VERSION}
@@ -59,6 +58,7 @@ services:
     networks:
       - ibmnet
     depends_on:
+      - fakesmtp
       - make-ssh-keys
       - esmaster
 
@@ -85,11 +85,11 @@ services:
     networks:
       - ibmnet
 
-  microservice:
-    build: microservice
-    container_name: microservice
-    networks:
-      - ibmnet
+#  microservice:
+#    build: microservice
+#    container_name: microservice
+#    networks:
+#      - ibmnet
 
   logstash:
     image: ibmcom/apiconnect:logstash-${APIC_VERSION}

@@ -4,5 +4,4 @@ ENV  DATAPOWER_WORKER_THREADS=2 \
 COPY src/ /
 RUN  chmod +x /start.sh /start/vbox-inotify-workaround.sh
 EXPOSE 443
-EXPOSE 9090
 CMD ["/start.sh"]
