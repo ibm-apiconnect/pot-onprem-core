@@ -113,7 +113,6 @@ services:
       - GATEWAY_DNS=datapower
     ports:
       - "443:443"
-      - "9090:9090"
     container_name: nginx
     depends_on:
       - ibmportal
