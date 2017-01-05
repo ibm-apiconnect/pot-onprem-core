@@ -17,7 +17,7 @@ services:
 
   fakesmtp:
     image: munkyboy/fakesmtp
-    container_name: fakesmtp.think.ibm
+    container_name: smtp.think.ibm
     volumes:
       - /tmp/fakemail/:/var/mail
     networks:
