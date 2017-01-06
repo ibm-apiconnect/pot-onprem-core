@@ -1,9 +1,8 @@
-CREATE SCHEMA `think` ;
 CREATE TABLE `think`.`item` (
   `id` INT NOT NULL AUTO_INCREMENT,
   `name` VARCHAR(45) NOT NULL,
   `description` VARCHAR(2000) NOT NULL,
-  `img` VARCHAR(255) NOT NULL
+  `img` VARCHAR(255) NOT NULL,
   `price` VARCHAR(45) NOT NULL,
   `rating` VARCHAR(45) NULL,
   PRIMARY KEY (`id`));
