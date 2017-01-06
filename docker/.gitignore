@@ -11,5 +11,4 @@ dea
 *.swp
 *.swo
 node_modules
-dist
 *xunit.xml

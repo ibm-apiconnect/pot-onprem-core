@@ -9,7 +9,8 @@ WORKDIR /usr/src/app
 
 # Install app dependencies
 COPY package.json /usr/src/app/
-RUN npm install --silent -g npm && \
+RUN npm install --silent -g bower && \
+    npm install --silent -g npm && \
     npm install --silent --prod && \
     npm prune --prod
 
