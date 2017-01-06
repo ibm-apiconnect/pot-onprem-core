@@ -149,6 +149,17 @@ services:
           - mysql.think.ibm
     restart: always
 
+  mongo:
+    image: mongo:latest
+    container_name: mongo
+    ports:
+      - "27017:27017"
+    networks:
+      ibmnet:
+        aliases:
+          - mongo.think.ibm
+    restart: always
+
   nginx:
     build: sni-proxy
     container_name: nginx
