@@ -15,11 +15,9 @@ RUN npm install --silent -g npm && \
 
 # Bundle app source
 COPY . /usr/src/app
-    
-COPY *.sh /usr/bin/
-RUN chmod +x /usr/bin/app.sh
-ENV PORT 2443
-EXPOSE 2443
-ENV NODE_ENV production
-CMD [ "/bin/sh", "-c", "/usr/bin/app.sh start && /usr/bin/app.sh wait" ]
 
+# Set port
+EXPOSE 2443
+
+# Start app
+CMD ["npm", "start"]

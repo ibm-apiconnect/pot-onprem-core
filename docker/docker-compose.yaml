@@ -17,23 +17,28 @@ services:
 
   fakesmtp:
     image: munkyboy/fakesmtp
-    container_name: smtp.think.ibm
+    container_name: fakesmtp
     volumes:
       - /tmp/fakemail/:/var/mail
     networks:
-      - ibmnet
+      ibmnet:
+        aliases:
+          - smtp.think.ibm
 
   datapower:
     build: datapower
-    container_name: api.think.ibm
+    container_name: datapower
     networks:
-      - ibmnet
+      ibmnet:
+        aliases:
+          - dp.think.ibm
+          - api.think.ibm
     environment:
       - DATAPOWER_ACCEPT_LICENSE=$ACCEPT_LICENSE
 
   apim:
     image: ibmcom/apiconnect:manager-${APIC_VERSION}
-    container_name: mgr.think.ibm
+    container_name: apim
     mem_limit: 2048m
     volumes:
       - apim_ihvar:/ihvar
@@ -54,7 +59,9 @@ services:
       - LOGSTASH_HOST=ibmlogstash
       - ACCEPT_LICENSE
     networks:
-      - ibmnet
+      ibmnet:
+        aliases:
+          - mgr.think.ibm
     depends_on:
       - fakesmtp
       - make-ssh-keys
@@ -62,7 +69,7 @@ services:
 
   ibmportal:
     image: ibmcom/apiconnect:portal-${APIC_VERSION}
-    container_name: developer.think.ibm
+    container_name: ibmportal
     environment:
       - PORTAL_LB=developer.think.ibm
       - PORTAL_PUBLIC_KEY=/keys/portal.pub
@@ -82,19 +89,25 @@ services:
       - apim
       - datapower
     networks:
-      - ibmnet
+      ibmnet:
+        aliases:
+          - developer.think.ibm
 
   consumer:
     build: consumer
-    container_name: consumer.think.ibm
+    container_name: consumer
     networks:
-      - ibmnet
+      ibmnet:
+        aliases:
+          - consumer.think.ibm
 
   stubsvcs:
-    build: stub-services
-    container_name: services.think.ibm
+    build: stubsvcs
+    container_name: stubsvcs
     networks:
-      - ibmnet
+      ibmnet:
+        aliases:
+          - services.think.ibm
 
   logstash:
     image: ibmcom/apiconnect:logstash-${APIC_VERSION}
@@ -128,6 +141,8 @@ services:
       - ibmportal
       - datapower
       - apim
+      - consumer
+      - stubsvcs
     networks:
       - ibmnet
 
