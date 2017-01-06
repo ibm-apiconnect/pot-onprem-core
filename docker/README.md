@@ -41,8 +41,7 @@ SMTP_PASSWORD=smtp_password                 (optional, unless SMTP_USERNAME is s
 
 There are 2 options to run IBM API Connect docker images. You can either use DataPower Gateway or Micro Gateway as the gateway service. Please refer to the following link for detailed steps.
 
-* [Using DataPower Gateway](https://github.com/strongloop/apiconnect-docker/blob/master/README-datapower.md)
-* [Using Micro Gateway](https://github.com/strongloop/apiconnect-docker/blob/master/README-microgateway.md)
+* [Using DataPower Gateway](https://github.com/ibm-apiconnect/pot-onprem-core/blob/5060/docker/README-datapower.md)
 
 ## Links to Resources
 

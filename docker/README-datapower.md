@@ -26,7 +26,7 @@ Service `make-ssh-keys` has completed and exited.
 
 To enable access to all the services, edit your local /etc/hosts file to map the IP address of your Docker host to the IBM API Connect host names,
 ```
-<docker-host-ip> apim datapower ibmportal microservice
+<docker-host-ip> mgr.think.ibm dp.think.ibm api.think.ibm developer.think.ibm smtp.think.ibm consumer.think.ibm services.think.ibm mongo.think.ibm mysql.think.ibm
 ```
 
 ### 2.  Configuring your IBM API Connect cloud
@@ -44,7 +44,7 @@ To enable access to all the services, edit your local /etc/hosts file to map the
     Click `Services`. Then in the `DataPower Services` pane, click `Service Settings` icon ![Service Settings](images/icon_service_settings.jpg). Enter
 
     ```
-    Address: datapower
+    Address: api.think.ibm
     ```
     then click `Save`.
 
@@ -52,7 +52,7 @@ To enable access to all the services, edit your local /etc/hosts file to map the
 
     ```
     Display Name: idg
-    Address: datapower
+    Address: dp.think.ibm
     Username: admin
     Password: admin
     ```
@@ -87,7 +87,7 @@ To enable access to all the services, edit your local /etc/hosts file to map the
 
     Click `Settings` > `Portal`.
 
-    From `Select Portal` drop down, select `IBM Developer Portal`. The URL is set automatically to: `https://ibmportal/organization_name/sb`,
+    From `Select Portal` drop down, select `IBM Developer Portal`. The URL is set automatically to: `https://developer.think.ibm/organization_name/sb`,
     where organization_name is the Name value that you specified when you created the provider organization in step 2.
 
     click `Save` icon ![Navigate to](images/icon_save.jpg) to save your Developer Portal configuration.
