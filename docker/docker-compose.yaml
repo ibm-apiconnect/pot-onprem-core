@@ -131,6 +131,17 @@ services:
       - esmaster
     restart: always
 
+  mysql:
+    build: mysql
+    container_name: mysql
+    ports:
+      - "3306:3306"
+    networks:
+      ibmnet:
+        aliases:
+          - mysql.think.ibm
+    restart: always
+
   nginx:
     build: sni-proxy
     container_name: nginx
