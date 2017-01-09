@@ -166,10 +166,11 @@ services:
     environment:
       - PORTAL_DNS=developer.think.ibm
       - APIM_DNS=mgr.think.ibm
-      - GATEWAY_DNS=api.think.ibm
+      - APIGATEWAY_DNS=api.think.ibm
       - DATAPOWER_DNS=dp.think.ibm
       - CONSUMER_DNS=consumer.think.ibm
       - STUBSVCS_DNS=services.think.ibm
+      - DOCKERHOST_DNS=inventory.think.ibm
     ports:
       - "443:443"
     volumes:
@@ -194,3 +195,9 @@ volumes:
 
 networks:
   ibmnet:
+    driver: bridge
+    ipam:
+      driver: default
+      config:
+      - subnet: 192.168.225.0/24
+        gateway: 192.168.225.1
