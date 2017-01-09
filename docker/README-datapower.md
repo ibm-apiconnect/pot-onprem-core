@@ -26,7 +26,7 @@ Service `make-ssh-keys` has completed and exited.
 
 To enable access to all the services, edit your local /etc/hosts file to map the IP address of your Docker host to the IBM API Connect host names,
 ```
-<docker-host-ip> mgr.think.ibm dp.think.ibm api.think.ibm developer.think.ibm smtp.think.ibm consumer.think.ibm services.think.ibm mongo.think.ibm mysql.think.ibm
+<docker-host-ip> mgr.think.ibm dp.think.ibm api.think.ibm developer.think.ibm inventory.think.ibm smtp.think.ibm consumer.think.ibm services.think.ibm mongo.think.ibm mysql.think.ibm
 ```
 
 ### 2.  Configuring your IBM API Connect cloud
