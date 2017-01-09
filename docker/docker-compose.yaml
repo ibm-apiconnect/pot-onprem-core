@@ -170,7 +170,7 @@ services:
       - DATAPOWER_DNS=dp.think.ibm
       - CONSUMER_DNS=consumer.think.ibm
       - STUBSVCS_DNS=services.think.ibm
-      - DOCKERHOST_DNS=inventory.think.ibm
+      - INVENTORYAPP_DNS=inventory.think.ibm
     ports:
       - "443:443"
     volumes:
