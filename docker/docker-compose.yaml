@@ -182,7 +182,9 @@ services:
       - consumer
       - stubsvcs
     networks:
-      - ibmnet
+      ibmnet:
+        aliases:
+          - inventory.think.ibm
     restart: always
 
 volumes:
