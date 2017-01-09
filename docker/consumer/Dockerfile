@@ -18,7 +18,7 @@ RUN npm install --silent -g bower && \
 COPY . /usr/src/app
 
 # Set port
-EXPOSE 2443
+EXPOSE 443
 
 # Start app
 CMD ["npm", "start"]

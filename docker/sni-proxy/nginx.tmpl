@@ -34,11 +34,11 @@ stream {
     }
 
     upstream consumer_backend {
-        server CONSUMER:2443;
+        server CONSUMER:443;
     }
 
     upstream stubsvcs_backend {
-        server STUBSVCS:1443;
+        server STUBSVCS:443;
     }
 
     server {

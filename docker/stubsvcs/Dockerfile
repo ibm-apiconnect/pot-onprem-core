@@ -17,7 +17,7 @@ RUN npm install --silent -g npm && \
 COPY . /usr/src/app
 
 # Set port
-EXPOSE 1443
+EXPOSE 443
 
 # Start app
 CMD ["npm", "start"]
