@@ -30,7 +30,7 @@ To enable access to all the services, edit your local /etc/hosts file to map the
 ```
 
 ### 2.  Configuring your IBM API Connect cloud
-* In a web browser, enter the URL <https://apim/cmc/>, the cloud console login window opens.
+* In a web browser, enter the URL <https://mgr.think.ibm/cmc/>, the cloud console login window opens.
 * Log in with the following credentials:
 
     ```
@@ -80,7 +80,7 @@ To enable access to all the services, edit your local /etc/hosts file to map the
     When you have completed the sign up instructions, the login page for the API Manager user interface opens; log in with your email address and password.
 
 ### 3. Configuring your IBM API Connect Catalog
-* If it is not already open, launch the API Manager user interface in a browser by entering URL <https://apim/apim/>. Log in with your email and password.
+* If it is not already open, launch the API Manager user interface in a browser by entering URL <https://mgr.think.ibm/apim/>. Log in with your email and password.
 * Click the `Navigate to` icon ![Navigate to](images/icon_navigate_to.png). The API Manager UI navigation pane opens. Click `Dashboard` .
 * Click the `Sandbox` catalog to display its details.
 * Enable Portal in the Sandbox catalog
@@ -124,7 +124,7 @@ To enable access to all the services, edit your local /etc/hosts file to map the
     where organization_name is the Name value that you specified when you created the provider organization in step 2.
 
 ### 5. Configuring the Developer Portal
-* In a web browser, enter url <https://ibmportal/organization_name/sb/>.
+* In a web browser, enter url <https://developer.think.ibm/organization_name/sb/>.
     where organization_name is the Name value that you specified when you created the provider organization in step 2.
 
     You can see the `loopback-example-database 1.0.0` microservice in the `Featured APIs` pane.
@@ -179,7 +179,7 @@ Client  Secret: yY7xL8hA0iD1tR0qD5hY0kG3rR3nC2eA3mM8iN2yL4hD2bQ2gU
 * Accessing POST API via DataPower Gateway
     ```
     $ curl -k --request POST \
-       --url https://datapower/organization_name/sb/api/Accounts \
+       --url https://api.think.ibm/organization_name/sb/api/Accounts \
        --header 'accept: application/json' \
        --header 'content-type: application/json' \
        --header 'x-ibm-client-id: ad37d0e2-4551-41f7-a011-88f0447f4560' \
@@ -190,7 +190,7 @@ Client  Secret: yY7xL8hA0iD1tR0qD5hY0kG3rR3nC2eA3mM8iN2yL4hD2bQ2gU
 * Accessing GET API via DataPower Gateway
     ```
     $ curl -k --request GET \
-       --url 'https://datapower/organization_name/sb/api/Accounts' \
+       --url 'https://api.think.ibm/organization_name/sb/api/Accounts' \
        --header 'accept: application/json' \
        --header 'content-type: application/json' \
        --header 'x-ibm-client-id: ad37d0e2-4551-41f7-a011-88f0447f4560' \
@@ -204,7 +204,7 @@ Client  Secret: yY7xL8hA0iD1tR0qD5hY0kG3rR3nC2eA3mM8iN2yL4hD2bQ2gU
   ```
   datapower | 20161202T183348.225Z [APIMgmt_848CDBBB62][0x80e00126][mpgw][error] mpgw(webapi-internal): tid(2097) gtid(2097): Valid backside connection could not be established: Failed to establish a backside connection, url: https://analytics-lb/x2020/v1/events/logevent
   ```
-  Open <https://apim/cmc/#/cloud/servers>,  check the status of datapower server in the `DataPower Services` pane.
+  Open <https://mgr.think.ibm/cmc/#/cloud/servers>,  check the status of datapower server in the `DataPower Services` pane.
   If server `idg` is marked `INACTIVE`,  wait 5 minutes, if it is still `INACTIVE`,
   click the `Server Actions` icon ![Server Actions](images/icon_cmc_server_actions.jpg) and select `Delete Server`.
   Then add the `idg` server back following the instructions in step 2.

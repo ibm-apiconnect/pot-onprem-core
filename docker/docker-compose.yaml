@@ -20,7 +20,7 @@ services:
     image: munkyboy/fakesmtp
     container_name: fakesmtp
     volumes:
-      - /tmp/fakemail/:/var/mail
+      - ./fakesmtp/mail/:/var/mail
     networks:
       ibmnet:
         aliases:
