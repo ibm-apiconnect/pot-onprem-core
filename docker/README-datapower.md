@@ -73,6 +73,8 @@ To enable access to all the services, edit your local /etc/hosts file to map the
     ```
     Click `Add` to create the provider organization. An invitation email is sent to the specified email address.
 
+    You will find the invitation email in the following location: `<docker project folder>/fakesmtp/mail`
+
     In the invitation email, click the activation link and follow the instructions to sign up.
 
     Enter your name and password, and click `Sign Up`.
