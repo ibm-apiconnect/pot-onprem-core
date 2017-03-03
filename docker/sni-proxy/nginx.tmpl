@@ -14,7 +14,6 @@ stream {
         DATAPOWER    datapower_backend;
         CONSUMER     consumer_backend;
         STUBSVCS     stubsvcs_backend;
-        INVENTORYAPP inventoryapp_backend;
         default      apigateway_backend;
     }
 
@@ -42,8 +41,9 @@ stream {
         server STUBSVCS:443;
     }
 
-    upstream inventoryapp_backend {
-        server 192.168.225.1:4001;
+    server {
+        listen inventory.think.ibm:80;
+        proxy_pass 192.168.225.1:3000;
     }
 
     server {

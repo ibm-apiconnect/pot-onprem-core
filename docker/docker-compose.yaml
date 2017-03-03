@@ -88,6 +88,8 @@ services:
       - ibmportal_var:/var
       - ibmportal_etc:/etc
       - config_ssh_keys:/keys:ro
+    ports:
+      - "2222:22"
     depends_on:
       - make-ssh-keys
       - apim
@@ -170,9 +172,9 @@ services:
       - DATAPOWER_DNS=dp.think.ibm
       - CONSUMER_DNS=consumer.think.ibm
       - STUBSVCS_DNS=services.think.ibm
-      - INVENTORYAPP_DNS=inventory.think.ibm
     ports:
       - "443:443"
+      - "80:80"
     volumes:
       - /var/log/nginx:/var/log/nginx
     depends_on:

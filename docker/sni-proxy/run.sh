@@ -7,6 +7,5 @@ sed -i -e "s/APIGATEWAY/${APIGATEWAY_DNS}/g" /etc/nginx/nginx.conf
 sed -i -e "s/DATAPOWER/${DATAPOWER_DNS}/g" /etc/nginx/nginx.conf
 sed -i -e "s/CONSUMER/${CONSUMER_DNS}/g" /etc/nginx/nginx.conf
 sed -i -e "s/STUBSVCS/${STUBSVCS_DNS}/g" /etc/nginx/nginx.conf
-sed -i -e "s/INVENTORYAPP/${INVENTORYAPP_DNS}/g" /etc/nginx/nginx.conf
 cat /etc/nginx/nginx.conf
 exec nginx -g "daemon off;"
